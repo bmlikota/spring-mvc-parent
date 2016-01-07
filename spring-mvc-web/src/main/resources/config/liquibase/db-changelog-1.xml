@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<!-- Tablica user -->
+	<changeSet id="20151110-0" author="bmlikota">
+
+		<createSequence sequenceName="USER_SEQ" startValue="1"
+			incrementBy="1" />
+
+		<createTable tableName="USER">
+			<column name="ID" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="LOGON" type="varchar(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PASSWORD" type="varchar(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NAME" type="varchar(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="LAST_NAME" type="varchar(20)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<rollback>
+			<dropTable tableName="USER" />
+			<dropSequence sequenceName="USER_SEQ"></dropSequence>
+		</rollback>
+
+	</changeSet>
+
+	<changeSet id="20151110-1" author="bmlikota">
+		<modifyDataType columnName="LOGON" newDataType="varchar(18)"
+			tableName="USER" />
+	</changeSet>
+
+	<changeSet id="20151110-2" author="bmlikota">
+		<addColumn tableName="USER">
+			<column name="FLAG" type="NUMBER(1)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="20151110-3" author="bmlikota">
+		<insert tableName="USER">
+			<column name="ID" value="3242"></column>
+			<column name="LOGON" value="bmlikota"></column>
+			<column name="PASSWORD" value="123"></column>
+			<column name="NAME" value="Branko"></column>
+			<column name="LAST_NAME" value="Mlikota"></column>
+			<column name="FLAG" value="1"></column>
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>

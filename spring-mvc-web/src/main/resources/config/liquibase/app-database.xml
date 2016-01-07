@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+	   		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+        	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSourceSirius"/>
+        <property name="changeLog" value="classpath:config/liquibase/master.xml"/>
+    </bean>
+
+    <beans profile="test,prod">
+        <!-- Datasources -->
+        <bean id="dataSourceSirius" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+            <property name="targetDataSource">
+                <jee:jndi-lookup jndi-name="jdbc/sirius"/>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="dev">
+        <bean id="dataSourceSirius" class="org.h2.jdbcx.JdbcDataSource">
+            <property name="url" value="jdbc:h2:~/.database/sirius;AUTO_SERVER=TRUE;MODE=Oracle"/>
+            <property name="user" value="sa"/>
+            <property name="password" value=""/>
+        </bean>
+    </beans>
+</beans>

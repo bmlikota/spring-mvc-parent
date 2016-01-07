@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+		<title>Spittr</title>
+	</head>
+	<body>
+		<div th:replace="fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+	
+		<h1>Register</h1>
+		<form method="POST" th:object="${spittr}" enctype="multipart/form-data">
+	
+			<!-- Display errors -->
+			<div class="errors" th:if="${#fields.hasErrors('*')}">
+				<ul>
+					<li th:each="err : ${#fields.errors('*')}" th:text="${err}">
+						Input is incorrect
+					</li>
+				</ul>
+			</div>
+	
+			<!-- First name -->
+			<label th:class="${#fields.hasErrors('firstName')}? 'error'">
+				First name
+			</label>
+			<input type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName')}? 'error'"></input>
+			<br/>
+	
+			<!-- Last name -->
+			<label th:class="${#fields.hasErrors('lastName')}? 'error'">
+				Last name
+			</label>
+			<input type="text" th:field="*{lastName}" th:class="${#fields.hasErrors('lastName')}? 'error'"></input>
+			<br/>
+	
+			<!-- Ussername -->
+			<label th:class="${#fields.hasErrors('username')}? 'error'">
+				Ussername
+			</label>
+			<input type="text" th:field="*{username}" th:class="${#fields.hasErrors('username')}? 'error'"></input>
+			<br/>
+	
+			<!-- Password -->
+			<label th:class="${#fields.hasErrors('password')}? 'error'">
+				Password
+			</label>
+			<input type="password" th:field="*{password}" th:class="${#fields.hasErrors('password')}? 'error'"></input>
+			<br/>
+
+			<label>Profile Picture</label>:
+				<input type="file" name="profilePicture" accept=".xls, .xlsx" />
+			<br/>
+	
+			<input type="submit" value="Register"></input>
+	
+		</form>
+
+		<div th:replace="fragments :: footer.my-footer"></div>
+	</body>
+</html>

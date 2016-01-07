@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-lazy-init="true"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<import resource="app-database.xml" />
+
+	<bean id="jdbcTemplateSirius" class="org.springframework.jdbc.core.JdbcTemplate">
+		<description>
+			This is declaration of JdbcTemplate instance which will be used by DAOs for database access
+			via JDBC and configured data source.
+		</description>
+		<property name="dataSource">
+			<ref bean="dataSourceSirius" />
+		</property>
+	</bean>
+	
+	<bean id="namedParametarJdbcTemplateSirius" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<description>
+			This is declaration of NamedParameterJdbcTemplate instance which will be used by DAOs for database access
+			via JDBC and configured data source.
+		</description>
+		<constructor-arg index="0" ref="jdbcTemplateSirius" />
+	</bean>
+
+</beans>

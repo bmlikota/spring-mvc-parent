@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+
+<!-- 	<changeSet id="20150731006-18" author="mcurkovic"> -->
+<!-- 		<renameColumn oldColumnName="POR_BANK_NAME" newColumnName="POR_PAYEE_BANK_NAME" -->
+<!-- 					  tableName="ALEX_PAYMENT_ORDERS"/> -->
+<!-- 	</changeSet> -->
+
+
+
+
+
+<!-- 	<changeSet id="20150731006-19" author="tsismanovic"> -->
+<!-- 		<dropForeignKeyConstraint baseTableName="ALEX_PAYMENT_ORDERS" -->
+<!-- 			constraintName="ALEX_PAY_ORD_TYPE_FK" /> -->
+<!-- 	</changeSet> -->
+
+
+
+
+
+<!-- 	<changeSet id="20150727000-2" author="jcukman"> -->
+<!-- 		<dropNotNullConstraint columnDataType="varchar(20)" -->
+<!-- 			columnName="BEN_NICKNAME" tableName="ALEX_BENEFICIARY" /> -->
+<!-- 	</changeSet> -->
+
+
+
+
+
+<!-- 	<changeSet id="20150910001-7" author="mcurkovic"> -->
+<!-- 		<update tableName="ALEX_PAYMENT_ORDERS"> -->
+<!-- 			<column name="POR_AST_ID" value="WAST"></column> -->
+<!-- 			<where>POR_AST_ID is null</where> -->
+<!-- 		</update> -->
+<!-- 	</changeSet> -->
+
+
+
+
+
+<!--     <changeSet id="20150919000-4" author="tsismanovic" dbms="oracle"> -->
+<!--         <sql splitStatements="false"> -->
+<!--             BEGIN -->
+<!--             DBMS_SCHEDULER.CREATE_JOB ( -->
+<!--             job_name => 'ALEX_CLEAR_DAILY_LIMITS', -->
+<!--             job_type => 'PLSQL_BLOCK', -->
+<!--             job_action => 'DELETE ALEX_LIMIT_DAILY_USR_STATES;', -->
+<!--             number_of_arguments => 0, -->
+<!--             start_date => SYSDATE, -->
+<!--             repeat_interval => 'TRUNC(SYSDATE+1)', -->
+<!--             end_date => NULL, -->
+<!--             job_class => 'DEFAULT_JOB_CLASS', -->
+<!--             enabled => TRUE, -->
+<!--             auto_drop => FALSE, -->
+<!--             comments => 'Clearing daily limits every midnight', -->
+<!--             credential_name => NULL, -->
+<!--             destination_name => NULL -->
+<!--             ); -->
+<!--             END; -->
+<!--         </sql> -->
+
+<!--         <sql splitStatements="false"> -->
+<!--             BEGIN -->
+<!--             DBMS_SCHEDULER.CREATE_JOB ( -->
+<!--             job_name => 'ALEX_CLEAR_MONTHLY_LIMITS', -->
+<!--             job_type => 'PLSQL_BLOCK', -->
+<!--             job_action => 'DELETE ALEX_LIMIT_MONTHLY_USR_STATES;', -->
+<!--             number_of_arguments => 0, -->
+<!--             start_date => SYSDATE, -->
+<!--             repeat_interval => 'TRUNC( ADD_MONTHS( SYSDATE, 1 ), ''MM'' )', -->
+<!--             end_date => NULL, -->
+<!--             job_class => 'DEFAULT_JOB_CLASS', -->
+<!--             enabled => TRUE, -->
+<!--             auto_drop => FALSE, -->
+<!--             comments => 'Clearing monthly limits on end of the month', -->
+<!--             credential_name => NULL, -->
+<!--             destination_name => NULL -->
+<!--             ); -->
+<!--             END; -->
+<!--         </sql> -->
+<!--     </changeSet> -->
+
+
+
+
+
+
+<!-- ************************************ U sql datoteci napisem sve opercije koje ovdje pisem preko tagova ********************************* -->
+<!-- 	<changeSet id="20151026000-1" author="opotkonjak"> -->
+<!-- 		<sqlFile -->
+<!-- 			path="classpath:config/liquibase/changelogs/data/backoffice/backoffice-data-model.sql" /> -->
+<!-- 	</changeSet> -->
+
+
+
+
+
+
+
+<!-- <changeSet id="20151028001-0" author="jskorupan" dbms="h2" context="dev"> -->
+<!--         <sql splitStatements="false"> -->
+
+<!--             insert into users (USR_ID,USR_PERSONAL_ID,USR_REMARK) -->
+<!--             values (users_seq.nextval,'401106845',null); -->
+<!--             insert into users (USR_ID,USR_PERSONAL_ID,USR_REMARK) -->
+<!--             values (users_seq.nextval,'303053476',null); -->
+<!--             insert into users (USR_ID,USR_PERSONAL_ID,USR_REMARK) -->
+<!--             values (users_seq.nextval,'126018652',null); -->
+<!--             insert into users (USR_ID,USR_PERSONAL_ID,USR_REMARK) -->
+<!--             values (users_seq.nextval,'101794753',null); -->
+<!--             insert into users (USR_ID,USR_PERSONAL_ID,USR_REMARK) -->
+<!--             values (users_seq.nextval,'101794021',null); -->
+
+<!--             insert into tasks (TSK_ID,TSK_USER_ID,TSK_MAKER_ID,TSK_CHECKER_ID,TSK_TASK_TYPE_ID,TSK_TASK_STATE_ID,TSK_CREATE_DATE,TSK_CHANGE_DATE,TSK_PARENT_ID) -->
+<!--             values (tasks_seq.nextval,(select usr_id from users where usr_personal_id = '401106845'), -->
+<!--                 (select busr_id from backoffice_users where busr_username = 'app'),(select busr_id from backoffice_users where busr_username = 'app'), -->
+<!--                 '3','3',current_date,current_date,null); -->
+<!--             insert into tasks (TSK_ID,TSK_USER_ID,TSK_MAKER_ID,TSK_CHECKER_ID,TSK_TASK_TYPE_ID,TSK_TASK_STATE_ID,TSK_CREATE_DATE,TSK_CHANGE_DATE,TSK_PARENT_ID) -->
+<!--             values (tasks_seq.nextval,(select usr_id from users where usr_personal_id = '303053476'), -->
+<!--                 (select busr_id from backoffice_users where busr_username = 'app'),(select busr_id from backoffice_users where busr_username = 'app'), -->
+<!--                 '3','3',current_date,current_date,null); -->
+<!--             insert into tasks (TSK_ID,TSK_USER_ID,TSK_MAKER_ID,TSK_CHECKER_ID,TSK_TASK_TYPE_ID,TSK_TASK_STATE_ID,TSK_CREATE_DATE,TSK_CHANGE_DATE,TSK_PARENT_ID) -->
+<!--             values (tasks_seq.nextval,(select usr_id from users where usr_personal_id = '126018652'), -->
+<!--                 (select busr_id from backoffice_users where busr_username = 'app'),(select busr_id from backoffice_users where busr_username = 'app'), -->
+<!--                 '3','3',current_date,current_date,null); -->
+<!--             insert into tasks (TSK_ID,TSK_USER_ID,TSK_MAKER_ID,TSK_CHECKER_ID,TSK_TASK_TYPE_ID,TSK_TASK_STATE_ID,TSK_CREATE_DATE,TSK_CHANGE_DATE,TSK_PARENT_ID) -->
+<!--             values (tasks_seq.nextval,(select usr_id from users where usr_personal_id = '101794753'), -->
+<!--                 (select busr_id from backoffice_users where busr_username = 'app'),(select busr_id from backoffice_users where busr_username = 'app'), -->
+<!--                 '3','3',current_date,current_date,null); -->
+<!--             insert into tasks (TSK_ID,TSK_USER_ID,TSK_MAKER_ID,TSK_CHECKER_ID,TSK_TASK_TYPE_ID,TSK_TASK_STATE_ID,TSK_CREATE_DATE,TSK_CHANGE_DATE,TSK_PARENT_ID) -->
+<!--             values (tasks_seq.nextval,(select usr_id from users where usr_personal_id = '101794021'), -->
+<!--                 (select busr_id from backoffice_users where busr_username = 'app'),(select busr_id from backoffice_users where busr_username = 'app'), -->
+<!--                 '3','3',current_date,current_date,null); -->
+
+<!--             insert into user_services (USV_ID,USV_USER_ID,USV_SERVICE_ID,USV_SERVICE_STATE_ID,USV_REQUEST_DATE,USV_ISSUE_DATE,USV_CHANGE_DATE,USV_TASK_ID) -->
+<!--             values (user_services_seq.nextval,(select usr_id from users where usr_personal_id = '401106845'),'1','3',current_date,current_date,current_date,'1'); -->
+<!--             insert into user_services (USV_ID,USV_USER_ID,USV_SERVICE_ID,USV_SERVICE_STATE_ID,USV_REQUEST_DATE,USV_ISSUE_DATE,USV_CHANGE_DATE,USV_TASK_ID) -->
+<!--             values (user_services_seq.nextval,(select usr_id from users where usr_personal_id = '303053476'),'1','3',current_date,current_date,current_date,'2'); -->
+<!--             insert into user_services (USV_ID,USV_USER_ID,USV_SERVICE_ID,USV_SERVICE_STATE_ID,USV_REQUEST_DATE,USV_ISSUE_DATE,USV_CHANGE_DATE,USV_TASK_ID) -->
+<!--             values (user_services_seq.nextval,(select usr_id from users where usr_personal_id = '126018652'),'1','3',current_date,current_date,current_date,'3'); -->
+<!--             insert into user_services (USV_ID,USV_USER_ID,USV_SERVICE_ID,USV_SERVICE_STATE_ID,USV_REQUEST_DATE,USV_ISSUE_DATE,USV_CHANGE_DATE,USV_TASK_ID) -->
+<!--             values (user_services_seq.nextval,(select usr_id from users where usr_personal_id = '101794753'),'1','3',current_date,current_date,current_date,'4'); -->
+<!--             insert into user_services (USV_ID,USV_USER_ID,USV_SERVICE_ID,USV_SERVICE_STATE_ID,USV_REQUEST_DATE,USV_ISSUE_DATE,USV_CHANGE_DATE,USV_TASK_ID) -->
+<!--             values (user_services_seq.nextval,(select usr_id from users where usr_personal_id = '101794021'),'1','3',current_date,current_date,current_date,'5'); -->
+<!--         </sql> -->
+<!--     </changeSet> -->
+
+
+
+
+</databaseChangeLog>

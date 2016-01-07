@@ -1,0 +1,20 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html>
+<head>
+<title>Spittles</title>
+</head>
+
+<body>
+	<table>
+      <tr>
+        <th>message</th>
+      </tr>
+      <tr th:each="spittle : ${spittleList}">
+        <div th:object="${spittle}">
+        	<td th:text="*{message}">poruka</td>
+        </div>
+      </tr>
+    </table>
+</body>
+</html>

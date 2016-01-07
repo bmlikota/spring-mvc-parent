@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<!-- Tablica address -->
+	<changeSet id="20151110-4" author="bmlikota">
+
+		<createSequence sequenceName="ADDRESS_SEQ" startValue="1"
+			incrementBy="1" />
+
+		<createTable tableName="ADDRESS">
+			<column name="ID" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="USE_ID" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="LOCATION" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint 
+        	constraintName = "USER_FK" 
+        	referencedTableName = "USER" 
+        	referencedColumnNames = "ID" 
+        	baseTableName = "ADDRESS" 
+        	baseColumnNames = "USE_ID"/>
+
+        <rollback>
+			<dropTable tableName="ADDRESS" />
+			<dropSequence sequenceName="ADDRESS_SEQ"></dropSequence>
+		</rollback>
+	</changeSet>
+
+	<!-- Postojecu kolonu mijenja u notnull -->
+	<changeSet author="bmlikota" id="20151110-5">
+	<!-- schemaName="public" -->
+		<addNotNullConstraint
+			columnDataType="NUMBER(1)" 
+			columnName="FLAG" 
+			defaultNullValue="0"
+			tableName="USER" />
+	</changeSet>
+
+<!-- 	<changeSet id="20150731006-18" author="mcurkovic"> -->
+<!-- 		<renameColumn oldColumnName="POR_BANK_NAME" newColumnName="POR_PAYEE_BANK_NAME" -->
+<!-- 					  tableName="ALEX_PAYMENT_ORDERS"/> -->
+<!-- 	</changeSet> -->
+
+<!-- 	<changeSet id="20150731006-19" author="tsismanovic"> -->
+<!-- 		<dropForeignKeyConstraint baseTableName="ALEX_PAYMENT_ORDERS" -->
+<!-- 			constraintName="ALEX_PAY_ORD_TYPE_FK" /> -->
+<!-- 	</changeSet> -->
+
+<!-- 	<changeSet id="20150727000-2" author="jcukman"> -->
+<!-- 		<dropNotNullConstraint columnDataType="varchar(20)" -->
+<!-- 			columnName="BEN_NICKNAME" tableName="ALEX_BENEFICIARY" /> -->
+<!-- 	</changeSet> -->
+
+<!-- 	<changeSet id="20150910001-7" author="mcurkovic"> -->
+<!-- 		<update tableName="ALEX_PAYMENT_ORDERS"> -->
+<!-- 			<column name="POR_AST_ID" value="WAST"></column> -->
+<!-- 			<where>POR_AST_ID is null</where> -->
+<!-- 		</update> -->
+<!-- 	</changeSet> -->
+
+<!--     <changeSet id="20150919000-4" author="tsismanovic" dbms="oracle"> -->
+<!--         <sql splitStatements="false"> -->
+<!--             BEGIN -->
+<!--             DBMS_SCHEDULER.CREATE_JOB ( -->
+<!--             job_name => 'ALEX_CLEAR_DAILY_LIMITS', -->
+<!--             job_type => 'PLSQL_BLOCK', -->
+<!--             job_action => 'DELETE ALEX_LIMIT_DAILY_USR_STATES;', -->
+<!--             number_of_arguments => 0, -->
+<!--             start_date => SYSDATE, -->
+<!--             repeat_interval => 'TRUNC(SYSDATE+1)', -->
+<!--             end_date => NULL, -->
+<!--             job_class => 'DEFAULT_JOB_CLASS', -->
+<!--             enabled => TRUE, -->
+<!--             auto_drop => FALSE, -->
+<!--             comments => 'Clearing daily limits every midnight', -->
+<!--             credential_name => NULL, -->
+<!--             destination_name => NULL -->
+<!--             ); -->
+<!--             END; -->
+<!--         </sql> -->
+
+<!--         <sql splitStatements="false"> -->
+<!--             BEGIN -->
+<!--             DBMS_SCHEDULER.CREATE_JOB ( -->
+<!--             job_name => 'ALEX_CLEAR_MONTHLY_LIMITS', -->
+<!--             job_type => 'PLSQL_BLOCK', -->
+<!--             job_action => 'DELETE ALEX_LIMIT_MONTHLY_USR_STATES;', -->
+<!--             number_of_arguments => 0, -->
+<!--             start_date => SYSDATE, -->
+<!--             repeat_interval => 'TRUNC( ADD_MONTHS( SYSDATE, 1 ), ''MM'' )', -->
+<!--             end_date => NULL, -->
+<!--             job_class => 'DEFAULT_JOB_CLASS', -->
+<!--             enabled => TRUE, -->
+<!--             auto_drop => FALSE, -->
+<!--             comments => 'Clearing monthly limits on end of the month', -->
+<!--             credential_name => NULL, -->
+<!--             destination_name => NULL -->
+<!--             ); -->
+<!--             END; -->
+<!--         </sql> -->
+<!--     </changeSet> -->
+
+</databaseChangeLog>

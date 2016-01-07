@@ -1,0 +1,182 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"></link>
+<title>Thymeleaf</title>
+</head>
+<body>
+
+	<!-- 0. header -->
+	<div th:include="header :: copy"></div><!-- ovo se pretvori u <div> -->
+	<div th:replace="header :: copy"></div><!-- ovo se pretvori u <header> -->
+	<div th:include="header :: #copy-section"></div>
+	<div th:include="header :: div.copy"></div><!-- moze i ovako <div th:include="header :: .copy"> -->
+	<br></br>
+
+	<!-- 1. message from properties -->
+	<p th:text="#{home.welcome}">Welcome to our grocery store!</p>
+	<p th:utext="#{home.welcome2}">Welcome to our grocery store!</p>
+
+	<!-- 2. ${variable expression} -->
+	<p>Today is: <span th:text="${today}">13 February 2011</span></p>
+	<!-- get method -->
+	<p>Get method: <span th:text="${thymeleaf.username}">username</span></p>
+
+	<!-- 3. = 1. and 2. combination -->
+	<p th:utext="#{home.welcome3(${thymeleaf.username})}">
+		Welcome to our grocery store, Sebastian Pepper!
+	</p>
+
+	<!-- 4. calling method -->
+	<p th:utext="${thymeleaf.method('arg')}">
+		Calling method!
+	</p>
+
+	<!-- 5. Expression Basic Objects -->
+	<p>
+		Established locale country: <span th:text="${#locale.country}">US</span>.
+	</p>
+
+	<!-- 6. Expressions on selections -->
+	<div th:object="${thymeleaf}">
+	    <p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+	    <p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+	    <p>User name: <span th:text="*{username}">Saturn</span>.</p>
+	     <p>Propertie: <span th:text="*{propertie}">Saturn</span>.</p>
+	</div>
+
+	<!-- 7. Elvis -->
+	<div th:object="${thymeleaf}">
+  		<p>Password: <span th:text="*{password}?: '(no password specified)'">27</span>.</p>
+	</div>
+
+	<br></br>
+	<!-- 8. -->
+	<p>--------------------------------------------------------------------------</p>
+	<form action="subscribe.html" th:action="@{/home}"> <!-- action="subscribe.html" bezveze stavljeno -->
+	  <fieldset>
+	    <input type="submit" value="Subscribe me!" th:attr="value=#{subscribe.submit} + ' attr'"></input>
+	    <!-- drugi nacin -->
+	    <input type="submit" value="Subscribe me!" th:value="#{subscribe.submit} + ' value'"></input>
+
+	  </fieldset>
+	</form>
+
+	<br></br>
+	<!-- 9. Testiranje validacije polja -->
+  	<label>
+		email
+	</label>
+    <input type="text" th:field="${thymeleaf.emailAddress}" th:placeholder="#{thymeleaf.placeholder}"></input>
+    <span class="errField" th:if="${#fields.hasErrors('${thymeleaf.emailAddress}')}" th:errors="${thymeleaf.emailAddress}"></span>
+
+	<br></br>
+	<label>
+		Spittr first name
+	</label>
+    <input type="text" th:field="${thymeleaf.firstName}"></input>
+    <span class="errField" th:if="${#fields.hasErrors('${thymeleaf.firstName}')}" th:errors="${thymeleaf.firstName}"></span>
+
+	<br></br>
+	<!-- 10. ${variable expression} -->
+	<p>Dijakritik: <span th:text="${dijakritik}">ch</span></p>
+
+	<br></br>
+	<!-- 11. checkbox -->
+	<input type="checkbox" name="option1" checked="checked"></input>
+	<input type="checkbox" name="option2"></input>
+
+	<br></br>
+	<!-- 12. iteririanje -->
+	<h1>Product list</h1>
+    <table>
+      <tr>
+        <th>name</th>
+        <th>Last name</th>
+        <th>username</th>
+      </tr>
+      <tr th:each="spittr,statusIteracije : ${thymeleaf.list}" th:class="${statusIteracije.odd}? 'odd' : 'even'"> <!-- status varijabla definirana kako bi iz nje mogli citati razne statuse iteracije -->
+        <div th:object="${spittr}"><!-- jupiiii, ovo radi -->
+        	<td th:text="*{firstName}">Name</td>
+	        <td th:text="*{lastName}">Last name</td>
+	        <td th:text="*{username}">username</td>
+        </div>
+      </tr>
+    </table>
+
+	<br></br>
+	<!-- 13. if -->
+	<h1>Product list with IF</h1>
+    <table>
+      <tr>
+        <th>name</th>
+        <th>Last name</th>
+        <th>username</th>
+      </tr>
+      <tr th:each="spittr,statusIteracije : ${thymeleaf.list}" th:class="${statusIteracije.odd}? 'odd' : 'even'"> <!-- status varijabla definirana kako bi iz nje mogli citati razne statuse iteracije -->
+        <td th:text="${spittr.firstName}">Name</td>
+        <td th:text="${spittr.lastName}">Last name</td>
+        <td>
+       		<span th:text="${spittr.username}" th:if="${not #lists.isEmpty(spittr.username)}">username</span>
+       		<span th:text="'no username'" th:if="${#lists.isEmpty(spittr.username)}">no</span>
+		</td>
+      </tr>
+    </table>
+
+	<!-- 14. precedence -->
+	<h1>Precedence</h1>
+	<ul>
+  		<li th:each="item : ${thymeleaf.list}" th:text="${item.firstName}">Item firstName here...</li>
+	</ul>
+	<ul>
+ 		<li th:text="${item.firstName}" th:each="item : ${thymeleaf.list}">Item description here...</li>
+	</ul>
+
+	<!--/*-->
+  	<div>
+    	you can see me only before thymeleaf processes me!
+  	</div>
+	<!--*/-->
+
+	<!-- 15. block -->
+	<h1>Block</h1>
+	<table>
+	  	<!--/*/ <th:block th:each="spittr : ${thymeleaf.list}"> /*/-->
+		    <tr>
+		        <td th:text="${spittr.firstName}">...</td>
+		        <td th:text="${spittr.lastName}">...</td>
+		    </tr>
+	  	<!--/*/ </th:block> /*/-->
+	</table>
+
+	<!-- 16. inline -->
+	<h1>Inline</h1>
+	<p th:inline="text">Hello, [[${thymeleaf.lastName}]]!</p>
+
+	<!-- 17. Nested object selection -->
+	<h1>Nested object selection</h1>
+	<div th:object="${thymeleaf.spittr}">
+    	<p><b>Name:</b> <span th:text="*{lastName}">Tomato</span></p>
+  	</div>
+
+	<!-- 18. Expression Basic Objects -->
+	<h1>Expression Basic Objects</h1>
+    <p><b>Locale:</b> <span th:text="${#ctx.locale}">Locale</span></p>
+
+	<!-- 19. #strings : utility methods for String objects: -->
+	<h1>#strings : utility methods for String objects:</h1>
+    <p><b>Spittr.toString():</b> <span th:text="${#strings.toString(thymeleaf.spittr)}">Locale</span></p>
+
+	<!-- 20. Spring beans - ne radi zbog costum qualifiera
+	<h1>Spring beans</h1>
+	<div th:text="${@spittleRepository.toString()}">...</div>
+	-->
+
+	<!-- 21. Set attribute title with parameter -->
+	<h1>Set attribute title with parameter</h1>
+    <div th:title="#{thymeleaf.title}">tekst s naslovom</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+		<title>Spittr</title>
+	</head>
+	<body>
+		<div th:replace="fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+
+		<h1>Welcome to Spittr (thymeleaf)</h1>
+		<a th:href="@{/spittles}">Spittles</a>
+		<a th:href="@{/spittr/register}">Register</a>
+	</body>
+</html>
