@@ -55,7 +55,7 @@ public class SpittrWebAppInitializer implements WebApplicationInitializer {
     // 2097152, 4194304, 0 -- to limit files to no more than 2 MB, to limit the
     // entire request to no
     // more than 4 MB
-    dispatcher.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
+    dispatcher.setMultipartConfig(new MultipartConfigElement("/home/bmlikota/MyTools", 2097152, 4194304, 0));
   }
 
 }

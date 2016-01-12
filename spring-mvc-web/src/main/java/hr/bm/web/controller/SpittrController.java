@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import hr.bm.ReadExcelFile;
 import hr.bm.dto.Spittr;
 
 @Controller
@@ -43,7 +44,9 @@ public class SpittrController {
       return "registerForm";
     }
 
-    profilePicture.transferTo(new File("../" + profilePicture.getOriginalFilename()));
+    File doc = new File("/home/bmlikota/MyTools/" + profilePicture.getOriginalFilename());
+    profilePicture.transferTo(doc);
+    ReadExcelFile.read(doc.getAbsolutePath());
 
     spittrRepository.add(spittr);
     model.addAttribute("username", spittr.getUsername());
