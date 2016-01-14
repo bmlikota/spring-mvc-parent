@@ -1,6 +1,5 @@
 package hr.bm.web.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import hr.bm.ReadExcelFile;
 import hr.bm.dto.Spittr;
 
 @Controller
@@ -44,9 +42,9 @@ public class SpittrController {
       return "registerForm";
     }
 
-    File doc = new File("/home/bmlikota/MyTools/" + profilePicture.getOriginalFilename());
-    profilePicture.transferTo(doc);
-    ReadExcelFile.read(doc.getAbsolutePath());
+//    File doc = new File("/home/bmlikota/MyTools/" + profilePicture.getOriginalFilename());
+//    profilePicture.transferTo(doc);
+//    ReadExcelFile.read(doc.getAbsolutePath());
 
     spittrRepository.add(spittr);
     model.addAttribute("username", spittr.getUsername());
