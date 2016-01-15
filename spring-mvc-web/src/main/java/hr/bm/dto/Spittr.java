@@ -10,7 +10,7 @@ public class Spittr {
   private String firstName;
 
   @NotNull
-  @Size(min = 5, max = 12, message = "{lastName.size}")
+  @Size(min = 5, max = 12, message = "Prezime - nedovoljan broj znakova")
   private String lastName;
 
   @NotNull

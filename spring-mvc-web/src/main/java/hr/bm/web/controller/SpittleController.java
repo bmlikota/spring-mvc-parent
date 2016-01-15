@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import hr.bm.annotation.Cold;
 import hr.bm.annotation.Creamy;
+import hr.bm.context.MyXmlBean;
 import hr.bm.context.SpittleRepository;
 import hr.bm.dto.Spittle;
 import hr.bm.error.SpittleNotFoundException;

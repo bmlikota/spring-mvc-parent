@@ -1,7 +1,6 @@
 package hr.bm.web.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
@@ -13,8 +12,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hr.bm.dto.Spittr;
 
@@ -24,8 +25,6 @@ public class SpittrController {
 
   @Autowired
   DataSource dataSource;
-
-  private static ArrayList<Spittr> spittrRepository = new ArrayList<Spittr>();
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public String showRegistrationForm(Model model) {
@@ -37,38 +36,30 @@ public class SpittrController {
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spittr spittr, Errors errors, Model model) throws IOException {
+  public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spittr spittr, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
       return "registerForm";
     }
 
-//    File doc = new File("/home/bmlikota/MyTools/" + profilePicture.getOriginalFilename());
+//    File doc = new File(profilePicture.getOriginalFilename());
 //    profilePicture.transferTo(doc);
 //    ReadExcelFile.read(doc.getAbsolutePath());
 
-    spittrRepository.add(spittr);
-    model.addAttribute("username", spittr.getUsername());
-    // model.addAttribute("lastName", spittr.getLastName()); // mogu dodati bilo
-    // koji kljuc i vrijednost
+    model.addAttribute("username", spittr.getUsername()); // ovo ce biti path varijabla
+    model.addAttribute("lastName", spittr.getLastName()); // mogu dodati bilo koji kljuc - ovo ce biti request parametar
+    model.addAttribute("param1", "Ne postoji request param u redirect metodi"); // mogu dodati bilo koji kljuc - ovo ce biti request parametar
+    model.addFlashAttribute("spittr", spittr); // saljem cijeli objekt koji ce zivjeti samo u redirectu
 
     return "redirect:/spittr/{username}";
     // return "redirect:/spittr/" + spittr.getUsername(); // ovo radi bez modela
   }
 
   @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-  public String showspittrProfile(@PathVariable String username, Model model) {
-    Spittr spittr = findByUsername(username);
-    model.addAttribute(spittr);
+  public String showspittrProfile(@PathVariable String username, @RequestParam("lastName") String lastName, Model model) {
+    System.out.println("Da li je spittr poslan kao flash atribut: " + model.containsAttribute("spittr"));
+//	Spittr spittr = findByUsername(username);
+//    model.addAttribute(spittr);
     return "profile";
-  }
-
-  public Spittr findByUsername(String userame) {
-    for (Spittr spitt : spittrRepository) {
-      if (userame.equals(spitt.getUsername())) {
-        return spitt;
-      }
-    }
-    return null;
   }
 
 }

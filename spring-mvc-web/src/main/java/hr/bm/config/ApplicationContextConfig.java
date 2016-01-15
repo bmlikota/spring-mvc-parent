@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -25,7 +26,8 @@ import liquibase.integration.spring.SpringLiquibase;
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
 @EnableAspectJAutoProxy // (proxyTargetClass = true)
-@PropertySources({ @PropertySource("classpath:/datasource.properties") })
+@PropertySources({ @PropertySource("classpath:/properties/config/datasource.properties") })
+@ImportResource({"classpath:/config/xmlbeans/bean-context.xml"})
 class ApplicationContextConfig {
 
 	/**
@@ -36,7 +38,7 @@ class ApplicationContextConfig {
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("messages.messages");
+		messageSource.setBasename("properties.messages.common.messages");
 		messageSource.setCacheSeconds(10);
 		return messageSource;
 	}
