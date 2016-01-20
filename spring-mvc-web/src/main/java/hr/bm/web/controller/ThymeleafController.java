@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hr.bm.context.MyXmlBean;
+import hr.bm.context.NotBeanClass;
 import hr.bm.dto.Spittr;
 import hr.bm.dto.Thymeleaf;
 import hr.bm.service.MyWebService;
@@ -38,8 +39,8 @@ public class ThymeleafController {
 	@Autowired
 	MyWebService myWebService;
 
-	 @Autowired
-	 MyXmlBean myXmlBean;
+	@Autowired
+	MyXmlBean myXmlBean;
 
 	@RequestMapping(value = "/thymeleaf", method = RequestMethod.GET)
 	public String thymeLeafExercise(Model model, @Valid Thymeleaf thymeleaf, Errors errors) {

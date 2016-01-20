@@ -51,6 +51,8 @@ public class SpittrWebAppInitializer implements WebApplicationInitializer {
     dispatcher.setLoadOnStartup(1);
     dispatcher.addMapping("/");
 
+    // Set profile
+	servletContext.setInitParameter("spring.profiles.active", "posao");
 
     // 2097152, 4194304, 0 -- to limit files to no more than 2 MB, to limit the
     // entire request to no

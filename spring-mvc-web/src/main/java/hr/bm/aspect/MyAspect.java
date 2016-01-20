@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyAspect {
 
-  @Pointcut("execution(* *NotBeanClass.print(..))")
-  public void print() {}
+	@Pointcut("execution(* *ThymeleafController.thymeLeafExercise(..))")
+	public void print() {
+	}
 
-  // TODO ovo ne radi
-  // @Before("print()")
-  @Before("execution(* hr.bm.web.controller.NotBeanClass.print(..))")
-  public void aspectPrint() {
-    System.out.println("Ovo je print iz aspecta! :-)");
-  }
+	// TODO ovo ne radi
+	@Before("execution(* hr.bm.web.controller.ThymeleafController.thymeLeafExercise(..))")
+	public void aspectPrint() {
+		System.out.println("Ovo je print iz aspecta! :-)");
+	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -46,6 +47,7 @@ class ApplicationContextConfig {
 	@Autowired
 	Environment env;
 
+	@Profile("posao")
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();

@@ -1,8 +1,8 @@
-package hr.bm.web.controller;
+package hr.bm.context;
 
 public class NotBeanClass {
 
-  void print() {
+  public void print() {
     System.out.println("Bean moze koristiti obicnu klasu! :-)");
   }
 
