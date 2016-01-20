@@ -7,6 +7,15 @@ div.errors {
 	border: 2px solid red;
 }
 
+.crveno {
+	background-color: #ffcccc;
+	border: 2px solid red;
+}
+
+.bm-div-borders {
+	border: 2px solid
+}
+
 header.my-header {
 	background-color: #33ccff;
 	border: 2px solid blue;
