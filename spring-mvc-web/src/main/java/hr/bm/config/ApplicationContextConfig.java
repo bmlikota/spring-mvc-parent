@@ -26,7 +26,7 @@ import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
-@EnableAspectJAutoProxy // (proxyTargetClass = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @PropertySources({ @PropertySource("classpath:/properties/config/datasource.properties") })
 @ImportResource({"classpath:/config/xmlbeans/bean-context.xml"})
 class ApplicationContextConfig {
@@ -99,5 +99,5 @@ class ApplicationContextConfig {
 	public MultipartResolver multipartResolver() throws IOException {
 		return new StandardServletMultipartResolver();
 	}
-
+	
 }
