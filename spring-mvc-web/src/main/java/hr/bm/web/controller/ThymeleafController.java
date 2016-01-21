@@ -66,7 +66,7 @@ public class ThymeleafController {
 		model.addAttribute("today", new java.util.Date());
 		model.addAttribute("dijakritik", "�");
 
-		return "thymeleaf";
+		return "thymeleaf/thymeleaf";
 	}
 
 	@RequestMapping(value = "/ajaxtest", method = RequestMethod.GET)

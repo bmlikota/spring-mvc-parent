@@ -9,12 +9,12 @@ public class HomeController {
 
   @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
   public String home() {
-    return "home";
+    return "home/home";
   }
 
   @RequestMapping(value = { "/fragment" }, method = RequestMethod.GET)
   public String fragment() {
-    return "header :: copy";
+    return "fragments/header :: copy";
   }
 
 }

@@ -32,13 +32,13 @@ public class SpittrController {
     // Spittr spittr = null; // za testiranje AppWideExceptionHandler
     // spittr.setUsername("bmlikota");
     model.addAttribute("spittr", spittr);
-    return "registerForm";
+    return "spitter/registerForm";
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spittr spittr, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
-      return "registerForm";
+      return "spitter/registerForm";
     }
 
 //    File doc = new File(profilePicture.getOriginalFilename());
@@ -59,7 +59,7 @@ public class SpittrController {
     System.out.println("Da li je spittr poslan kao flash atribut: " + model.containsAttribute("spittr"));
 //	Spittr spittr = findByUsername(username);
 //    model.addAttribute(spittr);
-    return "profile";
+    return "spitter/profile";
   }
 
 }

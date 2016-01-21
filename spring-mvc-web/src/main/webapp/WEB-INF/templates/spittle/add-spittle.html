@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<div th:replace="fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+	<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
 
 		<h1>Register</h1>
 		<form method="POST" th:object="${spittle}">
@@ -39,6 +39,6 @@
 
 		</form>
 
-		<div th:replace="fragments :: footer.my-footer"></div>
+		<div th:replace="fragments/fragments :: footer.my-footer"></div>
 </body>
 </html>

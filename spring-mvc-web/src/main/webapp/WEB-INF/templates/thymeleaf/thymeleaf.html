@@ -17,10 +17,10 @@
 	<body>
 
 		<!-- 0. header -->
-		<div class="crveno" th:include="header :: copy"></div><!-- ovo se pretvori u <div> -->
-		<div th:replace="header :: copy"></div><!-- ovo se pretvori u <header> -->
-		<div th:include="header :: #copy-section"></div>
-		<div th:include="header :: div.copy"></div><!-- moze i ovako <div th:include="header :: .copy"> -->
+		<div class="crveno" th:include="fragments/header :: copy"></div><!-- ovo se pretvori u <div> -->
+		<div th:replace="fragments/header :: copy"></div><!-- ovo se pretvori u <header> -->
+		<div th:include="fragments/header :: #copy-section"></div>
+		<div th:include="fragments/header :: div.copy"></div><!-- moze i ovako <div th:include="header :: .copy"> -->
 		<br></br>
 
 		<div class="bm-div-borders">

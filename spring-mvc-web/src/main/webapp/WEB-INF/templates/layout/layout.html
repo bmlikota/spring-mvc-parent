@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>bm@app</title>
+
+	<!-- CSS -->
+	<link th:href="#{app.context.url} + '/static/css/style.css'" rel="stylesheet" />
+
+	<!-- Java script -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+	<section layout:fragment="footer">
+		<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+	</section>
+
+	<section layout:fragment="content">
+		<p>Page content goes here</p>
+	</section>
+
+	<section layout:fragment="footer">
+		<div th:replace="fragments/fragments :: footer.my-footer"></div>
+	</section>
+</body>
+</html>

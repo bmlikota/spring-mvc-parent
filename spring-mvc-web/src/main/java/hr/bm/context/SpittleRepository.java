@@ -42,7 +42,7 @@ public class SpittleRepository {
     if (spittles == null) {
       return new Spittle(new Long("-1"), "There is no spittles!");
     }
-    Spittle spittle = spittles.get(id);
+    Spittle spittle = spittles.get(new Long("" + id));
     if (spittle == null) {
       spittle = new Spittle(new Long("-1"), "There is no spittle with id " + id + "!");
     }

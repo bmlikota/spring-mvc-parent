@@ -10,6 +10,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "hr.bm.web" })
@@ -62,6 +64,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public SpringTemplateEngine templateEngine() {
 		final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.addDialect(new LayoutDialect()); // layout.html
 		return templateEngine;
 	}
 

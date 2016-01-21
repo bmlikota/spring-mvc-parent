@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
 	</head>
 	<body>
-		<div th:replace="fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+		<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
 
 		<h1>Your Profile</h1>
 		<span th:text="${spittr.username}" />
@@ -15,6 +15,6 @@
 		<br/>
 		<span th:text="${spittr.lastName}" />
 
-		<div th:replace="fragments :: footer.my-footer"></div>
+		<div th:replace="fragments/fragments :: footer.my-footer"></div>
 	</body>
 </html>

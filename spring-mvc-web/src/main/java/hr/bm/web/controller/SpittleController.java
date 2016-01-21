@@ -39,15 +39,9 @@ public class SpittleController {
   public String spittles(Model model) {
     // System.out.println(Arrays.asList(applicationContext.getBeanDefinitionNames()));
     model.addAttribute("spittleList", srep.getSpittles());
-    return "spittles";
+    return "spittle/spittles";
   }
 
-  @RequestMapping(value = "/show", method = RequestMethod.GET)
-  public String showSpittle(@RequestParam("spittle_id") int spittleId, Model model) {
-    // System.out.println(srep.findOne(spittleId));
-    model.addAttribute("one", srep.findOne(spittleId));
-    return "spittle";
-  }
 
   @RequestMapping(value = "/spittle/{spittleId}", method = RequestMethod.GET)
   public String spittle(@PathVariable("spittleId") int spittleId, Model model) {
@@ -62,31 +56,31 @@ public class SpittleController {
       model.addAttribute("one", spittle);
     } catch (SpittleNotFoundException e) {
       // throw e; // HTTP Status 404 - Spittle Not Found
-      return "error";
+      return "errors/error";
     }
-    return "spittle";
+    return "spittle/spittle";
   }
 
   @ExceptionHandler(WrongIdException.class)
   public String handleDuplicateSpittle() {
-    return "error2";
+    return "errors/error2";
   }
 
   @RequestMapping(value = "/add-spittle", method = RequestMethod.GET)
   public String showRegistrationForm(Model model) {
     Spittle spittle = new Spittle(new Long("-1"), "(message)");
     model.addAttribute("spittle", spittle);
-    return "add-spittle";
+    return "spittle/add-spittle";
   }
 
   @RequestMapping(value = "/add-spittle", method = RequestMethod.POST)
   public String processRegistration(@Valid Spittle spittle, Errors errors) {
     if (errors.hasErrors()) {
-      return "add-spittle";
+      return "spittle/add-spittle";
     }
 
     srep.add(spittle);
-    return "add-spittle";
+    return "spittle/add-spittle";
   }
 
   // Ovo ne kuzim jos.
