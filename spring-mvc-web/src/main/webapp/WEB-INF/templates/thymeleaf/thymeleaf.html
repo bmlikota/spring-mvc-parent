@@ -1,27 +1,20 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://www.springframework.org/tags>">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 	<head>
-		<meta th:attr="data-context-url=#{app.context.url}" charset="UTF-8"></meta>
-		<title>Thymeleaf</title>
-
-		<!-- CSS -->
-		<link th:href="#{app.context.url} + '/static/css/style.css'" rel="stylesheet" />
-
 		<!-- Java script -->
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
-		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script th:src="@{/static/js/thymeleaf/thymeleaf.js}" type="text/javascript"></script>
 	</head>
 	<body>
 
+	<section layout:fragment="content">
+
 		<!-- 0. header -->
-		<div class="crveno" th:include="fragments/header :: copy"></div><!-- ovo se pretvori u <div> -->
-		<div th:replace="fragments/header :: copy"></div><!-- ovo se pretvori u <header> -->
-		<div th:include="fragments/header :: #copy-section"></div>
-		<div th:include="fragments/header :: div.copy"></div><!-- moze i ovako <div th:include="header :: .copy"> -->
-		<br></br>
+<!-- 		<div class="crveno" th:include="fragments/header :: copy"></div>ovo se pretvori u <div> -->
+<!-- 		<div th:replace="fragments/header :: copy"></div>ovo se pretvori u <header> -->
+<!-- 		<div th:include="fragments/header :: #copy-section"></div> -->
+<!-- 		<div th:include="fragments/header :: div.copy"></div>moze i ovako <div th:include="header :: .copy"> -->
+<!-- 		<br></br> -->
 
 		<div class="bm-div-borders">
 			<h3>Click definiran u js</h3>
@@ -191,6 +184,8 @@
 		<!-- 21. Set attribute title with parameter -->
 		<h1>Set attribute title with parameter</h1>
 	    <div th:title="#{thymeleaf.title}">tekst s naslovom</div>
+
+	</section>
 
 	</body>
 </html>
