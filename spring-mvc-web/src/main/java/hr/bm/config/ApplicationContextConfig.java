@@ -31,17 +31,23 @@ import liquibase.integration.spring.SpringLiquibase;
 @ImportResource({"classpath:/config/xmlbeans/bean-context.xml"})
 class ApplicationContextConfig {
 
+
 	/**
 	 * Bean koji sluzi da bi locirali properties datoteke za poruke.
 	 * 
 	 * @return
 	 */
 	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("properties.messages.common.messages");
-		messageSource.setCacheSeconds(10);
-		return messageSource;
+	public ResourceBundleMessageSource messageSource() {
+		final ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		String[] basenamesSpecific = {
+				"properties.messages.common.messages",
+				"properties.messages.app.thymeleaf"
+		};
+		source.setBasenames(basenamesSpecific);
+		source.setUseCodeAsDefaultMessage(true);
+		source.setDefaultEncoding("UTF-8");
+		return source;
 	}
 
 	@Autowired

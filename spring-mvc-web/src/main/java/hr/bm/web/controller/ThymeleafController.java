@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hr.bm.context.MyXmlBean;
 import hr.bm.context.NotBeanClass;
@@ -66,6 +68,13 @@ public class ThymeleafController {
 
 		return "thymeleaf";
 	}
+
+	@RequestMapping(value = "/ajaxtest", method = RequestMethod.GET)
+    public @ResponseBody
+    String getTime() {
+        String result = "Current time <b>" + new Date().toString() + "</b>";
+        return result;
+    }
 
 	private void dataBaseTest() {
 		String sql = "SELECT name FROM information_schema.users WHERE id = 2";
