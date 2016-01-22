@@ -4,12 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import hr.bm.interceptor.InitialInterceptor;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -32,23 +36,23 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	// <link th:href="@{/static/app/styles.css}" rel="stylesheet"
 		// type="text/css" />
-	// @Override
-	// public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	// registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-	// }
-	//
-	// @Override
-	// public void
-	// configureDefaultServletHandling(DefaultServletHandlerConfigurer
-	// conf) {
-	// conf.enable();
-	// }
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+//	}
+//
+//	@Override
+//	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
+//		conf.enable();
+//	}
 
-	/*
-	 * ****************** Thymeleaf ****************************************
-	 */
+	@Override
+	  public void addInterceptors(final InterceptorRegistry registry) {
+	    registry.addInterceptor(new InitialInterceptor()).addPathPatterns("/**")
+	        .excludePathPatterns("/static/**");
+	  }
 
-
+	// ****************** Thymeleaf - start ****************************************
 	@Bean
 	public ServletContextTemplateResolver templateResolver() {
 		final ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
@@ -75,5 +79,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setCharacterEncoding("UTF-8");
 		return viewResolver;
 	}
+	// ****************** Thymeleaf - end ****************************************
 
 }
