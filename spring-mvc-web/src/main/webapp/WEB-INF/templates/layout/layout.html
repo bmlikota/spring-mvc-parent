@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>bm@app</title>
+	<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">bm@app</title>
 
 	<meta th:attr="data-context-url=#{app.context.url}" charset="UTF-8"></meta>
 
@@ -18,9 +18,7 @@
 		<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
 	</section>
 
-	<section layout:fragment="content">
-		<p>Page content goes here</p>
-	</section>
+	<section layout:fragment="content"></section>
 
 	<section layout:fragment="footer">
 		<div th:replace="fragments/fragments :: footer.my-footer"></div>
