@@ -44,7 +44,7 @@ public class SpittleController {
 
 
   @RequestMapping(value = "/spittle/{spittleId}", method = RequestMethod.GET)
-  public String spittle(@PathVariable("spittleId") int spittleId, Model model) {
+  public String spittle(@PathVariable("spittleId") Long spittleId, Model model) {
     // ((Object) null).equals(null); // za testiranje AppWideExceptionHandler
     try {
       Spittle spittle = srep.findOne(spittleId);

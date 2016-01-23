@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -40,22 +41,24 @@ public class SpittleRepository {
   }
 
   @Cacheable(value = "bmCache")
-  public Spittle findOne(int id) {
+  public Spittle findOne(Long id) {
     if (spittles == null) {
       return new Spittle(new Long("-1"), "There is no spittles!");
     }
-    Spittle spittle = spittles.get(new Long("" + id));
+    Spittle spittle = spittles.get(id);
     if (spittle == null) {
       spittle = new Spittle(new Long("-1"), "There is no spittle with id " + id + "!");
     }
     return spittle;
   }
 
-  public void add(Spittle spittle) {
+  @CachePut(value="bmCache", key="#result.id", condition="#result!=null")
+  public Spittle add(Spittle spittle) {
     if (spittles == null) {
       spittles = new HashMap<Long, Spittle>();
     }
     spittles.put(spittle.getId(), spittle);
+    return spittle;
   }
 
   @Override
