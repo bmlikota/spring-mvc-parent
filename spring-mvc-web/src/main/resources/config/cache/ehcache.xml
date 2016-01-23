@@ -1,0 +1,14 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<cache name="bmCache"
+			maxEntriesLocalHeap="2500"
+			eternal="false"
+			overflowToDisk="false"
+			timeToLiveSeconds="3600"
+			timeToIdleSeconds="3600"
+			diskPersistent="false"
+			overflowToOffHeap="false"
+			logging="true">
+	</cache>
+
+</ehcache>

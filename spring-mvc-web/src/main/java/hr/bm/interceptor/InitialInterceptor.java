@@ -10,7 +10,9 @@ public class InitialInterceptor implements HandlerInterceptor  {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("Interceptor - pre-handle");
+		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+		StackTraceElement e = stacktrace[2];
+		System.out.println("InitialInterceptor.java :: " + e.getClassName() + "." + e.getMethodName() + ":" + e.getLineNumber());
 		return true;
 	}
 

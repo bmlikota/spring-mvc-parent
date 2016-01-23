@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,7 @@ public class SpittleRepository {
     return list;
   }
 
+  @Cacheable(value = "bmCache")
   public Spittle findOne(int id) {
     if (spittles == null) {
       return new Spittle(new Long("-1"), "There is no spittles!");

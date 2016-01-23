@@ -4,9 +4,13 @@ import java.io.IOException;
 
 import javax.sql.DataSource;
 
+import net.sf.ehcache.CacheManager;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +21,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -28,9 +33,23 @@ import liquibase.integration.spring.SpringLiquibase;
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @PropertySources({ @PropertySource("classpath:/properties/config/datasource.properties") })
-@ImportResource({"classpath:/config/xmlbeans/bean-context.xml"})
+@ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
+@EnableCaching
 class ApplicationContextConfig {
 
+	@Bean
+	public EhCacheCacheManager cacheManager(CacheManager cm) {
+		return new EhCacheCacheManager(cm);
+	}
+
+	@Bean
+	public EhCacheManagerFactoryBean ehCacheCacheManager() {
+		EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
+		cmfb.setCacheManagerName("bmCache");
+		cmfb.setConfigLocation(new ClassPathResource("config/cache/ehcache.xml"));
+		cmfb.setShared(true);
+		return cmfb;
+	}
 
 	/**
 	 * Bean koji sluzi da bi locirali properties datoteke za poruke.
@@ -40,10 +59,7 @@ class ApplicationContextConfig {
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		final ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-		String[] basenamesSpecific = {
-				"properties.messages.common.messages",
-				"properties.messages.app.thymeleaf"
-		};
+		String[] basenamesSpecific = { "properties.messages.common.messages", "properties.messages.app.thymeleaf" };
 		source.setBasenames(basenamesSpecific);
 		source.setUseCodeAsDefaultMessage(true);
 		source.setDefaultEncoding("UTF-8");
@@ -75,22 +91,23 @@ class ApplicationContextConfig {
 		return springLiquibase;
 	}
 
-//	@Bean
-//	public JaxWsPortProxyFactoryBean myWebService() {
-//		JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
-//		URL wsdlDocumentUrl = null;
-//		try {
-//			wsdlDocumentUrl = new URL("http://localhost:8094/services/myWebService?wsdl");
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//		proxy.setWsdlDocumentUrl(wsdlDocumentUrl);
-//		proxy.setServiceName("myWebService");
-//		proxy.setPortName("MyWebServiceImplPort");
-//		proxy.setServiceInterface(MyWebService.class);
-//		proxy.setNamespaceUri("http://ws.bm.hr/");
-//		return proxy;
-//	}
+	// @Bean
+	// public JaxWsPortProxyFactoryBean myWebService() {
+	// JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
+	// URL wsdlDocumentUrl = null;
+	// try {
+	// wsdlDocumentUrl = new
+	// URL("http://localhost:8094/services/myWebService?wsdl");
+	// } catch (Exception e) {
+	// throw new RuntimeException(e);
+	// }
+	// proxy.setWsdlDocumentUrl(wsdlDocumentUrl);
+	// proxy.setServiceName("myWebService");
+	// proxy.setPortName("MyWebServiceImplPort");
+	// proxy.setServiceInterface(MyWebService.class);
+	// proxy.setNamespaceUri("http://ws.bm.hr/");
+	// return proxy;
+	// }
 
 	@Bean
 	public HttpInvokerProxyFactoryBean myWebService() {
@@ -100,10 +117,9 @@ class ApplicationContextConfig {
 		return proxy;
 	}
 
-
 	@Bean
 	public MultipartResolver multipartResolver() throws IOException {
 		return new StandardServletMultipartResolver();
 	}
-	
+
 }
