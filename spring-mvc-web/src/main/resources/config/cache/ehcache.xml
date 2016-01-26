@@ -1,14 +1,40 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
 
+<!-- 	maxBytesLocalHeap="100M" -->
+<!-- 	maxBytesLocalOffHeap="10G" -->
+<!-- 	maxBytesLocalDisk="50G"> -->
+<!-- 
+	- moze se i ovako alocirati memorija; ako su npr. 3 cache-a, onda svaki dobiva 1/3 od sva tri tear-a
+	- ako za dva cache-a rucno alociramo memoriju s maxBytesLocalHeap="40M", onda treci dobije 10M
+-->
+
+
+
+<!--
+	- eternal - ako je true, onda su svi zapis vjecno u cache-u, osim ako ih netko ne obrise
+	- timeToLiveSeconds - broj sekundi zivljenja zapisa u cache-u
+	- timeToIdleSeconds - broj sekundi zivljenja u cache-u, ako se element zapis ne koristi
+	- copyOnRead - dobjemo kopiju zapisa iz cache-a
+	- overflowToOffHeap - ako je false ond se koristi samo memory store; ako je true, koristi se i RAM za spremanje zapisa; ********* dostupan samo u enterprise verziji
+	- overflowToDisk - ako je true, koristi se i hard disk za spremanje zapisa; Spittle.class mora biti serijabilizilna
+	- memoryStoreEvictionPolicy - redoslijed po kojem se brisu zapisi iz zapunjenog cache-a
+	- maxEntriesLocalHeap - broj zapisa u cache-u na java heap-u
+-->
+
+<!-- 	<diskStore path="C:/Users/bmlikota/MyTools"/> --><!-- konfiguracija za overflowToDisk="true" -->
 	<cache name="bmCache"
-			maxEntriesLocalHeap="2500"
 			eternal="false"
-			overflowToDisk="false"
 			timeToLiveSeconds="3600"
 			timeToIdleSeconds="3600"
-			diskPersistent="false"
+			copyOnRead="false"
+			copyOnWrite="false"
 			overflowToOffHeap="false"
-			logging="true">
-	</cache>
+			overflowToDisk="false"
+			memoryStoreEvictionPolicy="FIFO"
+			maxEntriesLocalHeap="1"
 
+			logging="true">
+<!-- 		<persistence strategy="localTempSwap"/> --><!-- radi isto sto i overflowToDisk="true"; ne mogu u isto vrijeme biti ukljuceni -->
+	</cache>
+<!-- diskPersistent="false" -->
 </ehcache>
