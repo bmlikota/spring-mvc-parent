@@ -12,29 +12,40 @@
 
 <!--
 	- eternal - ako je true, onda su svi zapis vjecno u cache-u, osim ako ih netko ne obrise
-	- timeToLiveSeconds - broj sekundi zivljenja zapisa u cache-u
-	- timeToIdleSeconds - broj sekundi zivljenja u cache-u, ako se element zapis ne koristi
+	- timeToLiveSeconds - max broj sekundi zivljenja zapisa u cache-u
+	- timeToIdleSeconds - max broj sekundi zivljenja u cache-u, ako se zapis ne koristi
 	- copyOnRead - dobjemo kopiju zapisa iz cache-a
 	- overflowToOffHeap - ako je false ond se koristi samo memory store; ako je true, koristi se i RAM za spremanje zapisa; ********* dostupan samo u enterprise verziji
 	- overflowToDisk - ako je true, koristi se i hard disk za spremanje zapisa; Spittle.class mora biti serijabilizilna
 	- memoryStoreEvictionPolicy - redoslijed po kojem se brisu zapisi iz zapunjenog cache-a
 	- maxEntriesLocalHeap - broj zapisa u cache-u na java heap-u
+	- diskExpiryThreadIntervalSeconds - razmak izmedju pokretanja dretve koja brise stare zapise; 120 default; nije dobro stavljati malu vrijendost!!!!!!!!!!!!!!!!!
 -->
 
-<!-- 	<diskStore path="C:/Users/bmlikota/MyTools"/> --><!-- konfiguracija za overflowToDisk="true" -->
+<!-- 	<diskStore path="C:/Users/bmlikota/MyTools"/>konfiguracija za overflowToDisk="true" -->
 	<cache name="bmCache"
 			eternal="false"
-			timeToLiveSeconds="3600"
-			timeToIdleSeconds="3600"
+			timeToLiveSeconds="30"
+			timeToIdleSeconds="30"
+			diskExpiryThreadIntervalSeconds="30"
 			copyOnRead="false"
 			copyOnWrite="false"
 			overflowToOffHeap="false"
 			overflowToDisk="false"
 			memoryStoreEvictionPolicy="FIFO"
-			maxEntriesLocalHeap="1"
+			maxEntriesLocalHeap="2"
 
 			logging="true">
-<!-- 		<persistence strategy="localTempSwap"/> --><!-- radi isto sto i overflowToDisk="true"; ne mogu u isto vrijeme biti ukljuceni -->
+<!-- 			diskPersistent="false" -->
+
+
+		<!-- pinani zapisi se ne brisu iz cache-a sve dok ne zastare, bez obzira ima li ih vese od maxEntriesLocalHeap -->
+<!-- 		<pinning store="inCache" /> -->
+
+		<!-- radi isto sto i overflowToDisk="true"; ne mogu u isto vrijeme biti ukljuceni -->
+<!-- 		<persistence strategy="localTempSwap"/> -->
+<!-- 		<persistence strategy="localRestartable"/> ********* dostupno samo u enterprise verziji -->
+
 	</cache>
-<!-- diskPersistent="false" -->
+
 </ehcache>
