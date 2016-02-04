@@ -24,19 +24,23 @@
 
 <!-- 	<diskStore path="C:/Users/bmlikota/MyTools"/>konfiguracija za overflowToDisk="true" -->
 	<cache name="bmCache"
+
 			eternal="false"
 			timeToLiveSeconds="30"
 			timeToIdleSeconds="30"
 			diskExpiryThreadIntervalSeconds="30"
+
 			copyOnRead="false"
 			copyOnWrite="false"
-			overflowToOffHeap="false"
-			overflowToDisk="false"
+
 			memoryStoreEvictionPolicy="FIFO"
 			maxEntriesLocalHeap="2"
 
+			overflowToOffHeap="false"
+			overflowToDisk="false"
+			diskPersistent="false"
+
 			logging="true">
-<!-- 			diskPersistent="false" -->
 
 
 		<!-- pinani zapisi se ne brisu iz cache-a sve dok ne zastare, bez obzira ima li ih vese od maxEntriesLocalHeap -->
@@ -45,6 +49,7 @@
 		<!-- radi isto sto i overflowToDisk="true"; ne mogu u isto vrijeme biti ukljuceni -->
 <!-- 		<persistence strategy="localTempSwap"/> -->
 <!-- 		<persistence strategy="localRestartable"/> ********* dostupno samo u enterprise verziji -->
+<!-- 		<persistence strategy="none"/>default -->
 
 	</cache>
 
