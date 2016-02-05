@@ -1,12 +1,12 @@
 package hr.bm.aspect;
 
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-@Component
 @Aspect
+@Component
 public class MyAspect {
 
 	@Pointcut("execution(* *ThymeleafController.thymeLeafExercise(..))")
@@ -14,7 +14,7 @@ public class MyAspect {
 	}
 
 	// TODO ovo ne radi
-	@Before("execution(* hr.bm.web.controller.ThymeleafController.thymeLeafExercise(..))")
+	@Around("execution(* hr.bm.web.controller.ThymeleafController..*(..))")
 	public void aspectPrint() {
 		System.out.println("Ovo je print iz aspecta! :-)");
 	}

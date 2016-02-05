@@ -1,20 +1,27 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 <head>
 <title>Spittles</title>
 </head>
 
 <body>
-	<table>
-      <tr>
-        <th>message</th>
-      </tr>
-      <tr th:each="spittle : ${spittleList}">
-        <div th:object="${spittle}">
-        	<td th:text="*{message}">poruka</td>
-        </div>
-      </tr>
-    </table>
+
+	<section layout:fragment="content">
+		<div>
+			<span th:text="${modelAttributeMsg} ?: 'Model attribute msg is empty!'"></span>
+		</div>
+		<table>
+	      <tr>
+	        <th>message</th>
+	      </tr>
+	      <tr th:each="spittle : ${spittleList}">
+	        <div th:object="${spittle}">
+	        	<td th:text="*{message}">poruka</td>
+	        </div>
+	      </tr>
+	    </table>
+	</section>
+
 </body>
 </html>

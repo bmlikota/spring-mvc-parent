@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import hr.bm.annotation.Cold;
 import hr.bm.annotation.Creamy;
-import hr.bm.context.MyXmlBean;
 import hr.bm.context.SpittleRepository;
 import hr.bm.dto.Spittle;
 import hr.bm.error.SpittleNotFoundException;
@@ -34,6 +34,11 @@ public class SpittleController {
 
   @Autowired
   ApplicationContext applicationContext;
+
+  @ModelAttribute("modelAttributeMsg")
+  public String isLimitCheckNeeded() {
+	    return "This is model attribute msg, visible only in the SpittleController :-)";
+  }
 
   @RequestMapping(value = "/spittles", method = RequestMethod.GET)
   public String spittles(Model model) {

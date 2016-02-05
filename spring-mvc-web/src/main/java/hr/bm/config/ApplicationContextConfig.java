@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import javax.sql.DataSource;
 
-import net.sf.ehcache.CacheManager;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,7 +12,6 @@ import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
@@ -28,10 +25,11 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import hr.bm.service.MyWebService;
 import liquibase.integration.spring.SpringLiquibase;
+import net.sf.ehcache.CacheManager;
 
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+//@EnableAspectJAutoProxy(proxyTargetClass = true)
 @PropertySources({ @PropertySource("classpath:/properties/config/datasource.properties") })
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
 @EnableCaching
