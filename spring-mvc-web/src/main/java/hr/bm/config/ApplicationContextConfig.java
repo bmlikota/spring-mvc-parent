@@ -1,123 +1,18 @@
 package hr.bm.config;
 
-import java.io.IOException;
-
-import javax.sql.DataSource;
-
-import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
-import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
-import hr.bm.service.MyWebService;
-import liquibase.integration.spring.SpringLiquibase;
-import net.sf.ehcache.CacheManager;
+import hr.bm.config.aspect.AspectConfig;
+import hr.bm.config.cache.EhCacheConfig;
+import hr.bm.config.datasource.H2Config;
+import hr.bm.config.messages.MessagesConfig;
+import hr.bm.config.webservice.MyServiceConfig;
 
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
-//@EnableAspectJAutoProxy(proxyTargetClass = true)
-@PropertySources({ @PropertySource("classpath:/properties/config/datasource.properties") })
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
-@EnableCaching
-class ApplicationContextConfig {
-
-	@Bean
-	public EhCacheCacheManager cacheManager(CacheManager cm) {
-		return new EhCacheCacheManager(cm);
-	}
-
-	@Bean
-	public EhCacheManagerFactoryBean ehCacheCacheManager() {
-		EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-		cmfb.setCacheManagerName("bmCache");
-		cmfb.setConfigLocation(new ClassPathResource("config/cache/ehcache.xml"));
-		cmfb.setShared(true);
-		return cmfb;
-	}
-
-	/**
-	 * Bean koji sluzi da bi locirali properties datoteke za poruke.
-	 * 
-	 * @return
-	 */
-	@Bean
-	public ResourceBundleMessageSource messageSource() {
-		final ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-		String[] basenamesSpecific = { "properties.messages.common.messages", "properties.messages.app.thymeleaf" };
-		source.setBasenames(basenamesSpecific);
-		source.setUseCodeAsDefaultMessage(true);
-		source.setDefaultEncoding("UTF-8");
-		return source;
-	}
-
-	@Autowired
-	Environment env;
-
-	@Profile("posao")
-	@Bean(destroyMethod = "close")
-	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl(env.getProperty("datasource.url")); // Runtime
-																// injection
-		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUsername("sa");
-		dataSource.setPassword("");
-		dataSource.setInitialSize(20);
-		dataSource.setMaxActive(30);
-		return dataSource;
-	}
-
-	@Bean
-	public SpringLiquibase springLiquibase() {
-		SpringLiquibase springLiquibase = new SpringLiquibase();
-		springLiquibase.setDataSource(dataSource());
-		springLiquibase.setChangeLog("classpath:config/liquibase/db-changelog.xml");
-		return springLiquibase;
-	}
-
-	// @Bean
-	// public JaxWsPortProxyFactoryBean myWebService() {
-	// JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
-	// URL wsdlDocumentUrl = null;
-	// try {
-	// wsdlDocumentUrl = new
-	// URL("http://localhost:8094/services/myWebService?wsdl");
-	// } catch (Exception e) {
-	// throw new RuntimeException(e);
-	// }
-	// proxy.setWsdlDocumentUrl(wsdlDocumentUrl);
-	// proxy.setServiceName("myWebService");
-	// proxy.setPortName("MyWebServiceImplPort");
-	// proxy.setServiceInterface(MyWebService.class);
-	// proxy.setNamespaceUri("http://ws.bm.hr/");
-	// return proxy;
-	// }
-
-	@Bean
-	public HttpInvokerProxyFactoryBean myWebService() {
-		HttpInvokerProxyFactoryBean proxy = new HttpInvokerProxyFactoryBean();
-		proxy.setServiceUrl("http://localhost:8095/jax-ws-example/myService.service");
-		proxy.setServiceInterface(MyWebService.class);
-		return proxy;
-	}
-
-	@Bean
-	public MultipartResolver multipartResolver() throws IOException {
-		return new StandardServletMultipartResolver();
-	}
-
-}
+@Import({EhCacheConfig.class, H2Config.class, MyServiceConfig.class, MessagesConfig.class, AspectConfig.class})
+class ApplicationContextConfig {}

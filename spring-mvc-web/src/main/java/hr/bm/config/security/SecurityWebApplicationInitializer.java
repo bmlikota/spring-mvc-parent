@@ -1,4 +1,4 @@
-package hr.bm.security;
+package hr.bm.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

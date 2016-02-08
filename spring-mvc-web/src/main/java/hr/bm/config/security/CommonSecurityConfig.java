@@ -1,4 +1,4 @@
-package hr.bm.security;
+package hr.bm.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -40,9 +39,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry
 			.addResourceHandler("/static/**")
 			.addResourceLocations("/static/")
-			.setCachePeriod(3600)
-			.resourceChain(true)
-			.addResolver(new PathResourceResolver());;
+			.setCachePeriod(60 * 60 * 24 * 365);
 	}
 
 	@Override
