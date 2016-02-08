@@ -2,12 +2,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 	<head>
-		<title>spitter register</title>
+		<title>login</title>
 	</head>
 	<body>
 
 		<section layout:fragment="content">
-			<h1>Register</h1>
+			<h1>Login</h1>
 			<form method="POST" th:object="${spittr}" enctype="multipart/form-data">
 
 				<!-- Display errors -->
@@ -51,7 +51,7 @@
 					<input type="file" name="profilePicture" accept=".xls, .xlsx" />
 				<br/>
 
-				<input type="submit" value="Register"></input>
+				<input type="submit" value="Login"></input>
 
 			</form>
 		</section>

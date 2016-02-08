@@ -20,25 +20,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import hr.bm.dto.Spittr;
 
 @Controller
-@RequestMapping(value = "/spittr")
+//@RequestMapping(value = "/spittr")
 public class SpittrController {
 
   @Autowired
   DataSource dataSource;
 
-  @RequestMapping(value = "/register", method = RequestMethod.GET)
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
   public String showRegistrationForm(Model model) {
     Spittr spittr = new Spittr();
     // Spittr spittr = null; // za testiranje AppWideExceptionHandler
     // spittr.setUsername("bmlikota");
     model.addAttribute("spittr", spittr);
-    return "spitter/registerForm";
+    return "login/loginPage";
   }
 
-  @RequestMapping(value = "/register", method = RequestMethod.POST)
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
   public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spittr spittr, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
-      return "spitter/registerForm";
+      return "login/loginPage";
     }
 
 //    File doc = new File(profilePicture.getOriginalFilename());
@@ -54,12 +54,12 @@ public class SpittrController {
     // return "redirect:/spittr/" + spittr.getUsername(); // ovo radi bez modela
   }
 
-  @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+  @RequestMapping(value = "/spittr/{username}", method = RequestMethod.GET)
   public String showspittrProfile(@PathVariable String username, @RequestParam("lastName") String lastName, Model model) {
     System.out.println("Da li je spittr poslan kao flash atribut: " + model.containsAttribute("spittr"));
 //	Spittr spittr = findByUsername(username);
 //    model.addAttribute(spittr);
-    return "spitter/profile";
+    return "login/profile";
   }
 
 }
