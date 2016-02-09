@@ -24,13 +24,6 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		return new String[] { "/" };
 	}
 
-//	@Override
-//	protected WebApplicationContext createRootApplicationContext() {
-//		WebApplicationContext context = (WebApplicationContext) super.createRootApplicationContext();
-//		((ConfigurableEnvironment) context.getEnvironment()).setActiveProfiles("posao");
-//		return context;
-//	}
-
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		// ovo potrebno da bi css radio
@@ -54,4 +47,11 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 //    dispatcher.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
 //  }
 //
+//}
+
+//@Override
+//protected WebApplicationContext createRootApplicationContext() {
+//	WebApplicationContext context = (WebApplicationContext) super.createRootApplicationContext();
+//	((ConfigurableEnvironment) context.getEnvironment()).setActiveProfiles("posao");
+//	return context;
 //}

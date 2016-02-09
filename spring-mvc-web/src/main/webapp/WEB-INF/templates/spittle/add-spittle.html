@@ -1,13 +1,13 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 <head>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
 	<title>Add spittle</title>
 </head>
 
 <body>
-	<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+
+	<section layout:fragment="content">
 
 		<h1>Add spitlle</h1>
 		<form method="POST" th:object="${spittle}">
@@ -39,6 +39,7 @@
 
 		</form>
 
-		<div th:replace="fragments/fragments :: footer.my-footer"></div>
+	</section>
+
 </body>
 </html>

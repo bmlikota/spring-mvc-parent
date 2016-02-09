@@ -21,9 +21,13 @@ public class CommonSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+		.csrf().disable() // TODO pogledati sto je csrf
 		.authorizeRequests()
-		.antMatchers("/spittr")
-		.authenticated().antMatchers(HttpMethod.POST, "/add-spittle")
+		.antMatchers("/home")
+//		.authenticated().antMatchers(HttpMethod.POST, "/add-spittle")
 		.authenticated().anyRequest().permitAll();
+//		.and()
+//		.formLogin().and()
+//		.httpBasic();
 	}
 }

@@ -12,7 +12,7 @@ import hr.bm.config.messages.MessagesConfig;
 import hr.bm.config.webservice.MyServiceConfig;
 
 @Configuration
-@ComponentScan(basePackages = { "hr.bm.context", "hr.bm.aspect" })
+@ComponentScan(basePackages = { "hr.bm.context" })
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
 @Import({EhCacheConfig.class, H2Config.class, MyServiceConfig.class, MessagesConfig.class, AspectConfig.class})
 class ApplicationContextConfig {}
