@@ -1,7 +1,9 @@
 package hr.bm.config;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -29,29 +31,28 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		// ovo potrebno da bi css radio
 		servletContext.getServletRegistration("default").addMapping("/static/*");
 
-	    // Set profile
+		// Set profile
 		servletContext.setInitParameter("spring.profiles.active", "posao");
 
 		super.onStartup(servletContext);
 	}
 
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		// 2097152, 4194304, 0 -- to limit files to no more than 2 MB, to limit
+		// the
+		// entire request to no
+		// more than 4 MB
+		registration.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
+	}
+
 }
 
-//public class SpittrWebAppInitializer impled ments WebApplicationInitializer {
-//
-//  public void onStartup(ServletContext servletContext) throws ServletException
-//  {
-//    // 2097152, 4194304, 0 -- to limit files to no more than 2 MB, to limit the
-//    // entire request to no
-//    // more than 4 MB
-//    dispatcher.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
-//  }
-//
-//}
-
-//@Override
-//protected WebApplicationContext createRootApplicationContext() {
-//	WebApplicationContext context = (WebApplicationContext) super.createRootApplicationContext();
-//	((ConfigurableEnvironment) context.getEnvironment()).setActiveProfiles("posao");
-//	return context;
-//}
+// @Override
+// protected WebApplicationContext createRootApplicationContext() {
+// WebApplicationContext context = (WebApplicationContext)
+// super.createRootApplicationContext();
+// ((ConfigurableEnvironment)
+// context.getEnvironment()).setActiveProfiles("posao");
+// return context;
+// }

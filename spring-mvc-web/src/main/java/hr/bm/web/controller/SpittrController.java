@@ -2,10 +2,8 @@ package hr.bm.web.controller;
 
 import java.io.IOException;
 
-import javax.sql.DataSource;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,10 +21,7 @@ import hr.bm.dto.Spittr;
 //@RequestMapping(value = "/spittr")
 public class SpittrController {
 
-  @Autowired
-  DataSource dataSource;
-
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  @RequestMapping(value = "/login-page", method = RequestMethod.GET)
   public String showRegistrationForm(Model model) {
     Spittr spittr = new Spittr();
     // Spittr spittr = null; // za testiranje AppWideExceptionHandler
@@ -35,7 +30,7 @@ public class SpittrController {
     return "login/loginPage";
   }
 
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  @RequestMapping(value = "/login-page", method = RequestMethod.POST)
   public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid Spittr spittr, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
       return "login/loginPage";
