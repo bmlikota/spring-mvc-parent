@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="20160219-1" author="bmlikota">
+
+		<sql splitStatements="false">
+			CREATE  TABLE users (
+				username VARCHAR(45) NOT NULL ,
+				password VARCHAR(45) NOT NULL ,
+				enabled TINYINT NOT NULL DEFAULT 1 ,
+				PRIMARY KEY (username)
+			);
+		</sql>
+
+		<rollback>
+			<dropTable tableName="USERS" />
+		</rollback>
+
+	</changeSet>
+
+	<changeSet id="20160219-2" author="bmlikota">
+
+		<sql splitStatements="false">
+			CREATE TABLE user_roles (
+				user_role_id INT(11) NOT NULL AUTO_INCREMENT,
+				username VARCHAR(45) NOT NULL,
+				role VARCHAR(45) NOT NULL,
+				PRIMARY KEY (user_role_id),
+				UNIQUE KEY uni_username_role (role,username),
+				CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username)
+			);
+        </sql>
+
+		<rollback>
+			<dropTable tableName="authorities" />
+		</rollback>
+
+	</changeSet>
+
+	<changeSet id="20160219-3" author="bmlikota">
+		<sql>
+			INSERT INTO users(username,password,enabled)
+			VALUES ('bmlikota','12', true);
+
+			INSERT INTO users(username,password,enabled)
+			VALUES ('alex','123456', true);
+			
+			INSERT INTO user_roles (username, role)
+			VALUES ('bmlikota', 'ROLE_USER');
+
+			INSERT INTO user_roles (username, role)
+			VALUES ('bmlikota', 'ROLE_ADMIN');
+
+			INSERT INTO user_roles (username, role)
+			VALUES ('alex', 'ROLE_USER');
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

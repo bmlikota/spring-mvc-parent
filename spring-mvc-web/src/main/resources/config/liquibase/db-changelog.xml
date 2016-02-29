@@ -6,4 +6,5 @@
 
 	<include file="classpath:config/liquibase/db-changelog-1.xml" />
 	<include file="classpath:config/liquibase/db-changelog-2.xml" />
+	<include file="classpath:config/liquibase/db-changelog-security.xml" />
 </databaseChangeLog>
