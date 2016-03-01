@@ -3,7 +3,7 @@ package hr.bm.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class Spittr {
+public class User {
 
   @NotNull
   @Size(min = 5, max = 15, message = "Ime - nedovoljan broj znakova")
@@ -20,9 +20,9 @@ public class Spittr {
   @NotNull
   private String password;
 
-  public Spittr() {}
+  public User() {}
 
-  public Spittr(String firstName, String lastName, String username, String password) {
+  public User(String firstName, String lastName, String username, String password) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;

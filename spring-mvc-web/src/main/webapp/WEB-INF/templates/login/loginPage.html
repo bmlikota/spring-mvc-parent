@@ -8,7 +8,7 @@
 
 		<section layout:fragment="content">
 			<h1>Login</h1>
-			<form method="POST" th:object="${spittr}" enctype="multipart/form-data">
+			<form method="POST" th:object="${user}" enctype="multipart/form-data">
 
 				<!-- Display errors -->
 				<div class="errors" th:if="${#fields.hasErrors('*')}">

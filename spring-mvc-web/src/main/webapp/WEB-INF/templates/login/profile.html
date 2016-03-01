@@ -1,20 +1,17 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 	<head>
-		<title>Spittr</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+		<title>User</title>
 	</head>
 	<body>
-		<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
-
-		<h1>Your Profile</h1>
-		<span th:text="${spittr.username}" />
-		<br/>
-		<span th:text="${spittr.firstName}" />
-		<br/>
-		<span th:text="${spittr.lastName}" />
-
-		<div th:replace="fragments/fragments :: footer.my-footer"></div>
+		<section layout:fragment="content">
+			<h1>Your profile</h1>
+			<span th:text="${user.username}"></span>
+			<br/>
+			<span th:text="${user.firstName}"></span>
+			<br/>
+			<span th:text="${user.lastName}"></span>
+		</section>
 	</body>
 </html>

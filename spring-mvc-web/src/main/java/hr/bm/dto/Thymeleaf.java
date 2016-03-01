@@ -6,52 +6,52 @@ public class Thymeleaf {
 
   private String emailAddress;
 
-  private Spittr spittr;
+  private User user;
 
-  private List<Spittr> list;
+  private List<User> list;
 
   public String getFirstName() {
-    return spittr.getFirstName();
+    return user.getFirstName();
   }
 
   public void setFirstName(String firstName) {
-    if (spittr == null) {
-      spittr = new Spittr();
+    if (user == null) {
+    	user = new User();
     }
-    spittr.setFirstName(firstName);
+    user.setFirstName(firstName);
   }
 
   public String getLastName() {
-    return spittr.getLastName();
+    return user.getLastName();
   }
 
   public void setLastName(String lastName) {
-    if (spittr == null) {
-      spittr = new Spittr();
+    if (user == null) {
+    	user = new User();
     }
-    spittr.setLastName(lastName);
+    user.setLastName(lastName);
   }
 
   public String getUsername() {
-    return spittr.getUsername();
+    return user.getUsername();
   }
 
   public void setUsername(String username) {
-    if (spittr == null) {
-      spittr = new Spittr();
+    if (user == null) {
+    	user = new User();
     }
-    spittr.setUsername(username);
+    user.setUsername(username);
   }
 
   public String getPassword() {
-    return spittr.getPassword();
+    return user.getPassword();
   }
 
   public void setPassword(String password) {
-    if (spittr == null) {
-      spittr = new Spittr();
+    if (user == null) {
+    	user = new User();
     }
-    spittr.setPassword(password);
+    user.setPassword(password);
   }
 
   public String getPropertie() {
@@ -70,19 +70,19 @@ public class Thymeleaf {
     this.emailAddress = emailAddress;
   }
 
-  public Spittr getSpittr() {
-    return spittr;
+  public User getSpittr() {
+    return user;
   }
 
-  public void setSpittr(Spittr spittr) {
-    this.spittr = spittr;
+  public void setSpittr(User spittr) {
+    this.user = spittr;
   }
 
-public List<Spittr> getList() {
+public List<User> getList() {
 	return list;
 }
 
-public void setList(List<Spittr> list) {
+public void setList(List<User> list) {
 	this.list = list;
 }
 

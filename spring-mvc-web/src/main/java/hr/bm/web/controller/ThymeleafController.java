@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hr.bm.context.MyXmlBean;
 import hr.bm.context.NotBeanClass;
-import hr.bm.dto.Spittr;
 import hr.bm.dto.Thymeleaf;
+import hr.bm.dto.User;
 import hr.bm.service.MyWebService;
 import hr.bm.web.validator.ThymeleafValidator;
 
@@ -57,7 +57,7 @@ public class ThymeleafController {
 		myXmlBean.print();
 		// TESTOVI - END //
 
-		setSpittrs(thymeleaf);
+		setUsers(thymeleaf);
 		thymeleaf.setUsername("bmlikota");
 		// thymeleaf.setFirstName("Branko");
 		thymeleaf.setLastName("Mlikota");
@@ -98,12 +98,12 @@ public class ThymeleafController {
 		}
 	}
 
-	private void setSpittrs(Thymeleaf thymeleaf) {
-		ArrayList<Spittr> list = new ArrayList<Spittr>();
-		list.add(new Spittr("Iva", "Ivi�", "iivic", "pass1"));
-		list.add(new Spittr("Maja", "Maji�", "mmajic", "pass2"));
-		list.add(new Spittr("Bruna", "Bruni", "", "pass3"));
-		list.add(new Spittr("Lolita", "Lol", "llol", "pass4"));
+	private void setUsers(Thymeleaf thymeleaf) {
+		ArrayList<User> list = new ArrayList<User>();
+		list.add(new User("Iva", "Ivi�", "iivic", "pass1"));
+		list.add(new User("Maja", "Maji�", "mmajic", "pass2"));
+		list.add(new User("Bruna", "Bruni", "", "pass3"));
+		list.add(new User("Lolita", "Lol", "llol", "pass4"));
 		thymeleaf.setList(list);
 	}
 

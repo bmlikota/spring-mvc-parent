@@ -29,25 +29,33 @@
 				username VARCHAR(45) NOT NULL,
 				role VARCHAR(45) NOT NULL,
 				PRIMARY KEY (user_role_id),
-				UNIQUE KEY uni_username_role (role,username),
+				UNIQUE KEY uni_username_role (role, username),
 				CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username)
 			);
         </sql>
 
 		<rollback>
-			<dropTable tableName="authorities" />
+			<dropTable tableName="user_roles" />
+			<dropForeignKeyConstraint baseTableName="user_roles"
+				constraintName="fk_username" />
+			<dropUniqueConstraint
+                   constraintName="uni_username_role"
+                   tableName="user_roles"
+                   uniqueColumns="role, username"/>
 		</rollback>
 
 	</changeSet>
 
 	<changeSet id="20160219-3" author="bmlikota">
 		<sql>
-			INSERT INTO users(username,password,enabled)
-			VALUES ('bmlikota','12', true);
+			INSERT INTO users(username, password, enabled)
+			VALUES ('bmlikota','3585', true);
+			<!-- 3585 is code of password 12 -->
 
 			INSERT INTO users(username,password,enabled)
-			VALUES ('alex','123456', true);
-			
+			VALUES ('alex','1450577475', true);
+			<!-- 1450577475 is code of password 123456 -->
+
 			INSERT INTO user_roles (username, role)
 			VALUES ('bmlikota', 'ROLE_USER');
 
