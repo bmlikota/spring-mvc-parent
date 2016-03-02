@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.validation.Valid;
 
@@ -45,14 +46,14 @@ public class ThymeleafController {
 	MyXmlBean myXmlBean;
 
 	@RequestMapping(value = "/thymeleaf", method = RequestMethod.GET)
-	public String thymeLeafExercise(Model model, @Valid Thymeleaf thymeleaf, Errors errors) {
+	public String thymeLeafExercise(Model model, @Valid Thymeleaf thymeleaf, Errors errors, HttpSession session) {
 
 		thymeleafValidator.validate(thymeleaf, errors);
 
 		// TESTOVI //
 		new NotBeanClass().print();
 		System.out.println(myWebService.printMethod(": mmoj web servis :-)"));
-		dataBaseTest();
+		dataBaseTest(session);
 		System.out.println("env.getProperty() = " + env.getProperty("datasource.url"));
 		myXmlBean.print();
 		// TESTOVI - END //
@@ -76,8 +77,8 @@ public class ThymeleafController {
         return result;
     }
 
-	private void dataBaseTest() {
-		String sql = "SELECT username FROM users WHERE username = 'bmlikota'";
+	private void dataBaseTest(HttpSession session) {
+		String sql = "SELECT username FROM users WHERE username = '" + session.getAttribute("username") + "'";
 		PreparedStatement ps = null;
 
 		ResultSet rs = null;
