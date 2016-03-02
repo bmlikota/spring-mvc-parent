@@ -77,7 +77,7 @@ public class ThymeleafController {
     }
 
 	private void dataBaseTest() {
-		String sql = "SELECT name FROM information_schema.users WHERE id = 2";
+		String sql = "SELECT username FROM users WHERE username = 'bmlikota'";
 		PreparedStatement ps = null;
 
 		ResultSet rs = null;
@@ -89,8 +89,8 @@ public class ThymeleafController {
 
 			if (rs.next()) {
 				System.out.println(
-						"Ovo je test konekcije na bazu. Iz baze sam dohvatio information_schema.users WHERE id = 2: "
-								+ rs.getString("name"));
+						"Ovo je test konekcije na bazu. Iz baze sam dohvatio korisnika: "
+								+ rs.getString("username"));
 			}
 
 		} catch (SQLException se) {

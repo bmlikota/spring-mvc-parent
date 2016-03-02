@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+
+		<section layout:fragment="header">
+			<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
+		</section>
+
+		<section layout:fragment="content">
+			<h1>Hello!</h1>
+			<form name="f" th:action="@{login}" method="POST">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+				<table>
+					<tr>
+						<td>
+							User:
+						</td>
+						<td>
+							<input type="text" name="username"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Password:
+						</td>
+						<td>
+							<input type="password" name="password"></input>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" name="submit" value="Login"></input>
+							<input id="remember_me" name="remember-me" type="checkbox"/>
+							<label for="remember_me" class="inline">Remember me</label>
+						</td>
+					</tr>
+				</table>
+
+			</form>
+		</section>
+
+	</body>
+</html>

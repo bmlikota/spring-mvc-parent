@@ -1,5 +1,9 @@
 package hr.bm.config.security;
 
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import hr.bm.utils.CommonPasswordEncoder;
 
@@ -29,18 +37,22 @@ public class CommonSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-				.authoritiesByUsernameQuery("SELECT username, role FROM user_roles WHERE username = ?")
-				.passwordEncoder(new CommonPasswordEncoder());
+			.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+			.authoritiesByUsernameQuery("SELECT username, role FROM user_roles WHERE username = ?")
+			.passwordEncoder(new CommonPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable() // TODO pogledati sto je csrf; thymeleaf
-								// ${_csrf.token}
-				.authorizeRequests().antMatchers("/home")
-				// .authenticated().antMatchers(HttpMethod.POST, "/add-spittle")
-				.authenticated().antMatchers("/spittr/**").authenticated().anyRequest().permitAll().and().formLogin()
-				.and().httpBasic();
+		http.authorizeRequests()
+			.antMatchers("/register/**").access("hasRole('ADMIN')") // .hasRole("ADMIN")
+			.and().authorizeRequests().antMatchers("/static/**").permitAll()
+			.anyRequest().authenticated()
+			// .authenticated().antMatchers(HttpMethod.POST, "/add-spittle")
+			// .and().requiresChannel().antMatchers("/profile/**").requiresSecure()
+			.and().formLogin().loginPage("/login").successHandler(new CustomAuthenticationSuccessHandler()).permitAll();
+			// .and().httpBasic();
+			// .and().rememberMe().tokenValiditySeconds(2419200).key("myAppKey");
 	}
+
 }

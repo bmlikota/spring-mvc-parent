@@ -2,13 +2,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 	<head>
-		<title>login</title>
+		<title>Register form</title>
 	</head>
 	<body>
 
 		<section layout:fragment="content">
-			<h1>Login</h1>
+			<h1>Create new user</h1>
 			<form method="POST" th:object="${user}" enctype="multipart/form-data">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 
 				<!-- Display errors -->
 				<div class="errors" th:if="${#fields.hasErrors('*')}">
@@ -51,7 +52,7 @@
 					<input type="file" name="profilePicture" accept=".xls, .xlsx" />
 				<br/>
 
-				<input type="submit" value="Login"></input>
+				<input type="submit" value="Save user"></input>
 
 			</form>
 		</section>
