@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<section layout:fragment="content">
-			<h1>Welcome to Spittr (thymeleaf)</h1>
+			<h1 th:text="#{home.msg.welcome}">Welcome to BM</h1>
 			<div>
 				<a th:href="@{/spittles}">Spittles</a>
 			</div>
