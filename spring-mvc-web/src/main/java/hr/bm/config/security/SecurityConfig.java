@@ -13,7 +13,7 @@ import hr.bm.utils.CommonPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class CommonSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;

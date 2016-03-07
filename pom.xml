@@ -10,5 +10,6 @@
 
 	<modules>
 		<module>spring-mvc-web</module>
+		<module>stock-alert-project</module>
 	</modules>
 </project>

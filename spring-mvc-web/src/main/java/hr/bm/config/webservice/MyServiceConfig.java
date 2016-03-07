@@ -2,6 +2,7 @@ package hr.bm.config.webservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 
 import hr.bm.service.MyWebService;
@@ -10,6 +11,7 @@ import hr.bm.service.MyWebService;
 public class MyServiceConfig {
 
 	@Bean
+	@Profile("posao")
 	public HttpInvokerProxyFactoryBean myWebService() {
 		HttpInvokerProxyFactoryBean proxy = new HttpInvokerProxyFactoryBean();
 		proxy.setServiceUrl("http://localhost:8095/jax-ws-example/myService.service");

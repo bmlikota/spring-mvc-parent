@@ -6,10 +6,8 @@
 		<artifactId>spring-mvc-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>hr.bm</groupId>
 	<artifactId>spring-mvc-web</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringMVCExercise Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 

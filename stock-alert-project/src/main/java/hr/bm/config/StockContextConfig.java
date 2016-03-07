@@ -16,4 +16,4 @@ import hr.bm.config.webservice.MyServiceConfig;
 @ComponentScan(basePackages = { "hr.bm.context" })
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
 @Import({EhCacheConfig.class, H2Config.class, MyServiceConfig.class, MessagesConfig.class, AspectConfig.class, FileUploadConfig.class})
-class ApplicationContextConfig {}
+public class StockContextConfig {}

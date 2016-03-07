@@ -7,13 +7,13 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import hr.bm.config.security.CommonSecurityConfig;
+import hr.bm.config.security.SecurityConfig;
 
-public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { ApplicationContextConfig.class, CommonSecurityConfig.class };
+		return new Class<?>[] { ContextConfig.class, SecurityConfig.class };
 	}
 
 	@Override
