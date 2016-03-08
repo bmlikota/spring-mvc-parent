@@ -19,7 +19,6 @@ public class CommonInterceptor implements HandlerInterceptor  {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 //		System.out.println("Post-handle");
-		
 	}
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)

@@ -14,7 +14,7 @@ public class MyAspect {
 	}
 
 	// TODO ovo ne radi
-	@Around("execution(* hr.bm.web.controller.ThymeleafController..*(..))")
+	@Around("execution(* hr.bm.context..*(..))")
 	public void aspectPrint() {
 		System.out.println("Ovo je print iz aspecta! :-)");
 	}
