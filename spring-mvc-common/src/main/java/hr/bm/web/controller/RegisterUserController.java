@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.validation.Valid;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hr.bm.dto.User;
 
-@Controller
-@RequestMapping(value = "/register")
-public class RegisterUserController {
+public abstract class RegisterUserController {
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
+  @RequestMapping(value = "/register", method = RequestMethod.GET)
   public String showRegistrationForm(Model model) {
 	  User user = new User();
     // Spittr spittr = null; // za testiranje AppWideExceptionHandler
@@ -28,7 +25,7 @@ public class RegisterUserController {
     return "register/registerPage";
   }
 
-  @RequestMapping(value = "", method = RequestMethod.POST)
+  @RequestMapping(value = "/register", method = RequestMethod.POST)
   public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid User user, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
       return "register/registerPage";
