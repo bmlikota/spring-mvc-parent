@@ -7,19 +7,7 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import hr.bm.config.security.SecurityConfig;
-
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { ContextConfig.class, SecurityConfig.class };
-	}
-
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebConfig.class };
-	}
+public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected String[] getServletMappings() {
