@@ -7,6 +7,12 @@
 	<body>
 
 		<section layout:fragment="header">
+			<div align="left">
+				<ul class="dropdown-menu" role="menu">
+				    <li><a href="?lang=en">eng</a></li>
+				    <li><a href="?lang=es">esp</a></li>
+				</ul>
+			</div>
 			<div th:replace="fragments/fragments :: header.my-header"></div><!-- ovo se pretvori u <header> -->
 		</section>
 
