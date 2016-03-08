@@ -19,7 +19,7 @@ public class MessagesConfig {
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		final ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-		String[] basenamesSpecific = { "properties.messages.common.messages", "properties.messages.app.thymeleaf" };
+		String[] basenamesSpecific = { "properties.messages.common.messages", "properties.messages.app.application" };
 		source.setBasenames(basenamesSpecific);
 		source.setUseCodeAsDefaultMessage(true);
 		source.setDefaultEncoding("UTF-8");
