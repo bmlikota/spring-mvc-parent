@@ -1,4 +1,4 @@
-package hr.bm.service;
+package hr.bm.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;

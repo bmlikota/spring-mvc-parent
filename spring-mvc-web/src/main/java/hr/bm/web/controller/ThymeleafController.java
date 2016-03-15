@@ -24,8 +24,8 @@ import hr.bm.context.MyXmlBean;
 import hr.bm.context.NotBeanClass;
 import hr.bm.dto.Thymeleaf;
 import hr.bm.dto.User;
-import hr.bm.service.MyWebService;
 import hr.bm.web.validator.ThymeleafValidator;
+import hr.bm.ws.MyWebService;
 
 @Controller
 public class ThymeleafController {

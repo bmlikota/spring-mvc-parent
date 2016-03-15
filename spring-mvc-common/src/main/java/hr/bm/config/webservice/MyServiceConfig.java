@@ -1,40 +1,31 @@
 package hr.bm.config.webservice;
 
+import java.net.URL;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
+import org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean;
 
-import hr.bm.service.MyWebService;
+import hr.bm.ws.MyWebService;
 
 @Configuration
 public class MyServiceConfig {
 
 	@Bean
-	@Profile("posao")
-	public HttpInvokerProxyFactoryBean myWebService() {
-		HttpInvokerProxyFactoryBean proxy = new HttpInvokerProxyFactoryBean();
-		proxy.setServiceUrl("http://localhost:8095/jax-ws-example/myService.service");
+	public JaxWsPortProxyFactoryBean myWebService() {
+		JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
+		URL wsdlDocumentUrl = null;
+		try {
+			wsdlDocumentUrl = new URL("http://localhost:8095/services/myWebService?wsdl");
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		proxy.setWsdlDocumentUrl(wsdlDocumentUrl);
+		proxy.setServiceName("myWebService");
+		proxy.setPortName("MyWebServiceImplPort");
 		proxy.setServiceInterface(MyWebService.class);
+		proxy.setNamespaceUri("http://ws.bm.hr/");
 		return proxy;
 	}
-
-	// @Bean
-	// public JaxWsPortProxyFactoryBean myWebService() {
-	// JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
-	// URL wsdlDocumentUrl = null;
-	// try {
-	// wsdlDocumentUrl = new
-	// URL("http://localhost:8094/services/myWebService?wsdl");
-	// } catch (Exception e) {
-	// throw new RuntimeException(e);
-	// }
-	// proxy.setWsdlDocumentUrl(wsdlDocumentUrl);
-	// proxy.setServiceName("myWebService");
-	// proxy.setPortName("MyWebServiceImplPort");
-	// proxy.setServiceInterface(MyWebService.class);
-	// proxy.setNamespaceUri("http://ws.bm.hr/");
-	// return proxy;
-	// }
 
 }
