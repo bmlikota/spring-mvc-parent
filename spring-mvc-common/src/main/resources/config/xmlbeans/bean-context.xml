@@ -10,7 +10,7 @@
    http://www.springframework.org/schema/webflow-config
    http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
-	<bean class="hr.bm.context.MyXmlBean">
+	<bean id="myXmlBean" class="hr.bm.context.MyXmlBean">
 	</bean>
 
 	<!-- web flow start -->
