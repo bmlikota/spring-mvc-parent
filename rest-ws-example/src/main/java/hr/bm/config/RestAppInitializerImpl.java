@@ -2,16 +2,16 @@ package hr.bm.config;
 
 import hr.bm.config.security.SecurityConfig;
 
-public class AppInitializerImpl extends AppInitializer {
+public class RestAppInitializerImpl extends AppInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { ContextConfigImpl.class, SecurityConfig.class };
+		return new Class<?>[] { RestContextConfigImpl.class, SecurityConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebConfigImpl.class };
+		return new Class<?>[] { RestWebConfigImpl.class };
 	}
 
 }
