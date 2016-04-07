@@ -59,10 +59,10 @@
     	<version>3.1.0</version>
     </dependency>
     <dependency>
-         <groupId>hr.bm</groupId>
-         <artifactId>spring-mvc-common</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-     </dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>2.7.3</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>rest-ws-example</finalName>
