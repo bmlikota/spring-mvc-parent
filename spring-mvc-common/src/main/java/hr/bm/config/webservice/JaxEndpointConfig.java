@@ -9,7 +9,7 @@ import org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean;
 import hr.bm.ws.MyWebService;
 
 @Configuration
-public class MyServiceConfig {
+public class JaxEndpointConfig {
 
 	@Bean
 	public JaxWsPortProxyFactoryBean myWebService() {

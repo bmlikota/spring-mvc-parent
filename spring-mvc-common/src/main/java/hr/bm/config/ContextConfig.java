@@ -9,11 +9,12 @@ import hr.bm.config.aspect.AspectConfig;
 import hr.bm.config.cache.EhCacheConfig;
 import hr.bm.config.datasource.H2Config;
 import hr.bm.config.fileupload.FileUploadConfig;
+import hr.bm.config.mail.MailConfig;
 import hr.bm.config.messages.MessagesConfig;
-import hr.bm.config.webservice.MyServiceConfig;
+import hr.bm.config.webservice.JaxEndpointConfig;
 
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.utils" })
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
-@Import({EhCacheConfig.class, H2Config.class, MyServiceConfig.class, MessagesConfig.class, AspectConfig.class, FileUploadConfig.class})
+@Import({EhCacheConfig.class, H2Config.class, JaxEndpointConfig.class, MessagesConfig.class, AspectConfig.class, FileUploadConfig.class, MailConfig.class})
 public abstract class ContextConfig {}

@@ -144,6 +144,11 @@
             <artifactId>spring-mvc-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+        	<groupId>hr.bm</groupId>
+        	<artifactId>yahoo-quotes</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 
 	<build>
