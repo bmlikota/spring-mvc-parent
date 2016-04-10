@@ -13,7 +13,14 @@
         <dependent-module archiveName="yahoo-quotes-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/yahoo-quotes/yahoo-quotes">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module deploy-path="/" handle="module:/overlay/prj/spring-mvc-resources?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
+            <dependency-type>consumes</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/" handle="module:/overlay/slf/?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
+            <dependency-type>consumes</dependency-type>
+        </dependent-module>
         <property name="context-root" value="spring-mvc-web"/>
         <property name="java-output-path" value="/spring-mvc-web/target/classes"/>
+        <property name="component.exclusion.patterns"/>
     </wb-module>
 </project-modules>

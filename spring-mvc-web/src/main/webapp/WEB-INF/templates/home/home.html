@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+	<head>
+		<title>Spittr</title>
+	</head>
+	<body>
+		<section layout:fragment="content">
+			<h1 th:text="#{home.msg.welcome}">Welcome to BM</h1>
+			<div>
+				<a th:href="@{/spittles}">Spittles</a>
+			</div>
+			<div>
+				<a th:href="@{/register}">Register new user</a>
+			</div>
+			<div>
+				<a th:href="@{/thymeleaf}">Thymeleaf</a>
+			</div>
+		</section>
+
+	</body>
+</html>
