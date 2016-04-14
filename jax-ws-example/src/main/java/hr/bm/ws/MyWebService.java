@@ -1,6 +1,7 @@
 package hr.bm.ws;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
@@ -9,6 +10,6 @@ import javax.jws.WebService;
 @WebService
 public interface MyWebService {
  
-	@WebMethod String printMethod(String name);
+	@WebMethod String printMethod(@WebParam(name = "text") String name);
 
 }
