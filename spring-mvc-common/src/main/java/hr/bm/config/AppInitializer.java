@@ -31,7 +31,7 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 		// the
 		// entire request to no
 		// more than 4 MB
-		registration.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
+		registration.setMultipartConfig(new MultipartConfigElement("C:/Users/Korisnik/MyTools", 2097152, 4194304, 0));
 	}
 
 }
