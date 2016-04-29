@@ -21,7 +21,7 @@ import hr.bm.dto.MyData;
 import hr.bm.error.MyDataNotFoundException;
 
 @Controller
-@RequestMapping("/service/rest")
+@RequestMapping("/bm-service")
 public class RestController {
 
 	private static final String MAX_LONG_AS_STRING = "9223372036854775807";
@@ -69,7 +69,7 @@ public class RestController {
 	public ResponseEntity<MyData> saveData(@RequestBody MyData myData, UriComponentsBuilder ucb) {
 		repo.add(myData);
 		HttpHeaders headers = new HttpHeaders();
-		URI locationURI = ucb.path("/service/rest/").path(String.valueOf(myData.getId())).build().toUri();
+		URI locationURI = ucb.path("/bm-service/").path(String.valueOf(myData.getId())).build().toUri();
 		headers.setLocation(locationURI);
 		return new ResponseEntity<MyData>(myData, headers, HttpStatus.CREATED);
 	}
@@ -112,8 +112,9 @@ public class RestController {
 	// Version 5
 	/**
 	 * Latest version (see upwards)
+	 * 
 	 * @param id
-	 * @return {@MyData}
+	 * @return {@link MyData}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody MyData getById(@PathVariable long id) {
@@ -132,6 +133,5 @@ public class RestController {
 		}
 		return null;
 	}
-	
 
 }
