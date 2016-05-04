@@ -1,10 +1,18 @@
 package hr.bm.dto;
 
-public class MyData {
+public class BmRestData {
 
 	private String message;
 
 	private double id;
+
+	public BmRestData() {
+	}
+
+	public BmRestData(String message, double id) {
+		this.message = message;
+		this.id = id;
+	}
 
 	public String getMessage() {
 		return message;
@@ -20,5 +28,9 @@ public class MyData {
 
 	public void setId(double id) {
 		this.id = id;
+	}
+
+	public String toString() {
+		return "id = " + id + ", message = " + message + ";;";
 	}
 }
