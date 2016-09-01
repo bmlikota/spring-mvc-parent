@@ -26,7 +26,7 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 		servletContext.getServletRegistration("default").addMapping("/static/*");
 
 		// Set profile
-		servletContext.setInitParameter("spring.profiles.active", "posao");
+		servletContext.setInitParameter("spring.profiles.active", "development");
 
 		super.onStartup(servletContext);
 	}
@@ -47,6 +47,6 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 // WebApplicationContext context = (WebApplicationContext)
 // super.createRootApplicationContext();
 // ((ConfigurableEnvironment)
-// context.getEnvironment()).setActiveProfiles("posao");
+// context.getEnvironment()).setActiveProfiles("development");
 // return context;
 // }

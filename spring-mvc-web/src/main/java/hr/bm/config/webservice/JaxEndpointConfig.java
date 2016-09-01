@@ -4,15 +4,16 @@ import java.net.URL;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean;
 
+import hr.bm.annotation.DevelopmentProfile;
+import hr.bm.annotation.ProductionProfile;
 import hr.bm.ws.MyWebService;
 
 @Configuration
 public class JaxEndpointConfig {
 
-	@Profile("home")
+	@ProductionProfile
 	@Bean
 	public JaxWsPortProxyFactoryBean myWebService() {
 		JaxWsPortProxyFactoryBean proxy = new JaxWsPortProxyFactoryBean();
@@ -30,7 +31,7 @@ public class JaxEndpointConfig {
 		return proxy;
 	}
 
-	@Profile("posao")
+	@DevelopmentProfile
 	@Bean(name = "myWebService")
 	public MyWebServiceMock myWebServiceMock() {
 		return new MyWebServiceMock();
