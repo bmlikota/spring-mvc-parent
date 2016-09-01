@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR" name="example-config">
+    <Properties>
+        <Property name="PATTERN">%-5level %d [%t] %c:%M(%L): %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <RollingFile name="fileWriter"
+                     fileName="C:/Users/bmlikota/MyLogs/log4j-application.log"
+                     filePattern="C:/Users/bmlikota/MyLogs/archive/log4j-application.log.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout pattern="${PATTERN}"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="fileWriter"/>
+        </Root>
+        <Logger name="hr.bm" level="TRACE" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+<!--         <Logger name="com.andrew_flower.example.Other" level="ERROR" additivity="true"/> -->
+    </Loggers>
+</Configuration>
