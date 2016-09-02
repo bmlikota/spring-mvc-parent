@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="ERROR" name="example-config">
-    <Properties>
-        <Property name="PATTERN">%-5level %d [%t] %c:%M(%L): %m%n</Property>
-    </Properties>
-    <Appenders>
-        <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="${PATTERN}"/>
-        </Console>
+<Configuration status="WARN">
 
-        <RollingFile name="fileWriter"
-                     fileName="C:/Users/bmlikota/MyLogs/log4j-application.log"
-                     filePattern="C:/Users/bmlikota/MyLogs/archive/log4j-application.log.%d{yyyy-MM-dd-hh-mm}.gz">
-            <PatternLayout pattern="${PATTERN}"/>
-            <TimeBasedTriggeringPolicy/>
-        </RollingFile>
-    </Appenders>
-    <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="fileWriter"/>
-        </Root>
-        <Logger name="hr.bm" level="TRACE" additivity="false">
-            <AppenderRef ref="STDOUT"/>
+	<Properties>
+		<Property name="LOG-PATH">C:/Users/bmlikota/MyLogs/logs</Property>
+		<Property name="PATTERN">%-5level %d [%t] %c:%M(%L): %m%n</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="console-log" target="SYSTEM_OUT">
+			<PatternLayout pattern="${PATTERN}"/>
+		</Console>
+
+		<RollingFile name="spring-mvc-log" fileName="${LOG-PATH}/spring-mvc-log.log" filePattern="${LOG-PATH}/spring-mvc-log-%d{yyyy-MM-dd-hh-mm}.log">
+			<PatternLayout pattern="${PATTERN}"/>
+			<Policies>
+  				<OnStartupTriggeringPolicy /> <!-- when the JVM starts -->
+  				<SizeBasedTriggeringPolicy size="20 MB" />
+  				<TimeBasedTriggeringPolicy /> <!-- when the current date no longer matches the log’s start date -->
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="error-log" fileName="${LOG-PATH}/error-log.log" filePattern="${LOG-PATH}/error-log-%d{yyyy-MM-dd-hh-mm}.log">
+			<PatternLayout pattern="${PATTERN}"/>
+			<Policies>
+  				<OnStartupTriggeringPolicy />
+  				<SizeBasedTriggeringPolicy size="20 MB" />
+  				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+
+	</Appenders>
+	<Loggers>
+		<!-- There should always be a RootLogger, and it will actually exist automatically if not defined. -->
+		<!-- Logs not caught be any other logger will be caught be the RootLogger. -->
+		<Root level="info" 
+			additivity="false">
+			<AppenderRef ref="console-log" />
+		</Root>
+
+		<!-- additivity="false" means that the entry will not be logged by parent/ancestor loggers (ie. the RootLogger here). -->
+		<Logger name="hr.bm" level="debug" additivity="false">
+            <appender-ref ref="spring-mvc-log" level="debug"/> <!-- Logs DEBUG, INFO, WARN, ERROR, FATAL. Everything except TRACE. -->
+            <appender-ref ref="console-log" level="info"/> <!-- Logs INFO, WARN, ERROR, FATAL. -->
+            <appender-ref ref="error-log" level="error"/> <!-- Logs ERROR, FATAL. -->
         </Logger>
-<!--         <Logger name="com.andrew_flower.example.Other" level="ERROR" additivity="true"/> -->
-    </Loggers>
+	</Loggers>
+
 </Configuration>

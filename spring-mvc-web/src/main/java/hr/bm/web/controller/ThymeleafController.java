@@ -64,6 +64,8 @@ public class ThymeleafController {
 		myXmlBean.print();
 
 		logger.info("This is log4j info : Testovi - KRAJ");
+		logger.debug("Debug log example.");
+		logger.error("Error log example.");
 		// TESTOVI - END //
 
 		setUsers(thymeleaf);
