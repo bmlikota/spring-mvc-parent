@@ -10,7 +10,7 @@
 			<h1 th:text="#{home.msg.welcome}">Welcome to BM</h1>
 			<h1>Create new user</h1>
 			<form method="POST" th:object="${user}" enctype="multipart/form-data">
-<!-- 				<input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 
 				<!-- Display errors -->
 				<div class="errors" th:if="${#fields.hasErrors('*')}">
