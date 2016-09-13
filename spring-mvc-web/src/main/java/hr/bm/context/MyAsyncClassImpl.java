@@ -14,8 +14,8 @@ public class MyAsyncClassImpl implements MyAsyncClass {
 	final static Logger logger = LogManager.getLogger(MyAsyncClassImpl.class);
 
 	/** 
-	 * This method starts executing 15 seconds after 
-	 * Spring starts and executes again and again with 15 
+	 * This method starts executing 5 seconds after 
+	 * Spring starts and executes again and again with 5 
 	 * seconds between the end of one invocation and the start of the next.
 	 */
 	@Async
