@@ -2,7 +2,8 @@
 <Configuration status="WARN">
 
 	<Properties>
-		<Property name="LOG-PATH">C:/Users/bmlikota/MyLogs/logs</Property>
+<!-- 		<Property name="LOG-PATH">C:/Users/bmlikota/MyLogs/logs</Property> -->
+		<Property name="LOG-PATH">D:/logs</Property>
 		<Property name="PATTERN">%-5level %d [%t] %c:%M(%L): %m%n</Property>
 	</Properties>
 
