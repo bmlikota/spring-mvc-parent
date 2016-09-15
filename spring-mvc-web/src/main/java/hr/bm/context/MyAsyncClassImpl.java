@@ -1,5 +1,7 @@
 package hr.bm.context;
 
+import java.util.Date;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
@@ -21,7 +23,15 @@ public class MyAsyncClassImpl implements MyAsyncClass {
 	@Async
 	@Scheduled(fixedDelay = 5000L, initialDelay = 5000L)
 	public void logAsyncMsg() {
-		logger.info("Message from async and scheduled method!");
+		Date date = new Date();
+		try {
+			if (date.getTime() % 2 == 0) {
+				Thread.sleep(6000L);
+			}
+		} catch (InterruptedException ignore) {
+			logger.error("Sleep went wrong!");
+		}
+		logger.info("Message from async and scheduled method!" + date.toString());
 	}
 
 }
