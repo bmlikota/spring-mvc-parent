@@ -12,6 +12,12 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
+//		return new String[] { "/do/*" };
+		/*
+		 * If you had mapped the DispatcherServlet to /do/*, the URL patterns in the @RequestMapping
+		 * annotations wouldn’t have changed, but in the browser address bar they would have /do in front
+		 * of them.
+		*/
 	}
 
 	@Override
@@ -20,7 +26,7 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 		servletContext.getServletRegistration("default").addMapping("/static/*");
 
 		// Set profile
-		servletContext.setInitParameter("spring.profiles.active", "posao");
+		servletContext.setInitParameter("spring.profiles.active", "development");
 
 		super.onStartup(servletContext);
 	}
@@ -31,7 +37,7 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 		// the
 		// entire request to no
 		// more than 4 MB
-		registration.setMultipartConfig(new MultipartConfigElement("C:/Users/bmlikota/MyTools", 2097152, 4194304, 0));
+		registration.setMultipartConfig(new MultipartConfigElement("C:/Users/Korisnik/MyTools", 2097152, 4194304, 0));
 	}
 
 }
@@ -41,6 +47,6 @@ public abstract class AppInitializer extends AbstractAnnotationConfigDispatcherS
 // WebApplicationContext context = (WebApplicationContext)
 // super.createRootApplicationContext();
 // ((ConfigurableEnvironment)
-// context.getEnvironment()).setActiveProfiles("posao");
+// context.getEnvironment()).setActiveProfiles("development");
 // return context;
 // }

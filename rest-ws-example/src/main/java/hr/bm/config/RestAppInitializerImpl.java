@@ -1,6 +1,10 @@
 package hr.bm.config;
 
+import javax.servlet.Filter;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import hr.bm.config.rest.CORSFilter;
 
 public class RestAppInitializerImpl extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,6 +21,11 @@ public class RestAppInitializerImpl extends AbstractAnnotationConfigDispatcherSe
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		return new Filter[]{new CORSFilter()};
 	}
 
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ import hr.bm.ws.MyWebService;
 
 @Controller
 public class ThymeleafController {
+
+	final static Logger logger = LogManager.getLogger(ThymeleafController.class);
 
 	@Autowired
 	DataSource dataSource;
@@ -51,11 +55,17 @@ public class ThymeleafController {
 		thymeleafValidator.validate(thymeleaf, errors);
 
 		// TESTOVI //
+		logger.info("This is log4j info : Testovi - POCETAK");
+
 		new NotBeanClass().print();
 		System.out.println(myWebService.printMethod(": mmoj web servis :-)"));
 		dataBaseTest(session);
 		System.out.println("env.getProperty() = " + env.getProperty("datasource.url"));
 		myXmlBean.print();
+
+		logger.info("This is log4j info : Testovi - KRAJ");
+		logger.debug("Debug log example.");
+		logger.error("Error log example.");
 		// TESTOVI - END //
 
 		setUsers(thymeleaf);

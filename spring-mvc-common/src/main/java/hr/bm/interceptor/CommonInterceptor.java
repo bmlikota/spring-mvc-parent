@@ -10,9 +10,7 @@ public class CommonInterceptor implements HandlerInterceptor  {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-		StackTraceElement e = stacktrace[2];
-		System.out.println("InitialInterceptor.java :: " + e.getClassName() + "." + e.getMethodName() + ":" + e.getLineNumber());
+		System.out.println("print iz CommonInterceptor.java");
 		return true;
 	}
 

@@ -26,7 +26,7 @@ public abstract class RegisterUserController {
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture, @Valid User user, Errors errors, RedirectAttributes model) throws IOException {
+  public String processRegistration(@RequestPart(name = "profilePicture", required = false) MultipartFile profilePicture, @Valid User user, Errors errors, RedirectAttributes model) throws IOException {
     if (errors.hasErrors()) {
       return "register/registerPage";
     }
