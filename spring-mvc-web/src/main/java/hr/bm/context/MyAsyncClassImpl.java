@@ -6,11 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import hr.bm.api.MyAsyncClass;
 
-@Component
+//@Component
 public class MyAsyncClassImpl implements MyAsyncClass {
 
 	final static Logger logger = LogManager.getLogger(MyAsyncClassImpl.class);
