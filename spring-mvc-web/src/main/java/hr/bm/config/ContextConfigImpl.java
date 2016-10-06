@@ -28,7 +28,11 @@ import hr.bm.config.webservice.JaxEndpointConfig;
 @Configuration
 @ComponentScan(basePackages = { "hr.bm.context", "hr.bm.utils" }, excludeFilters = @ComponentScan.Filter(Controller.class))
 @ImportResource({ "classpath:/config/xmlbeans/bean-context.xml" })
-@Import({EhCacheConfig.class, H2Config.class, JaxEndpointConfig.class, MessagesConfig.class, AspectConfig.class, FileUploadConfig.class, MailConfig.class})
+@Import({
+	EhCacheConfig.class, H2Config.class, JaxEndpointConfig.class,
+	MessagesConfig.class, AspectConfig.class, FileUploadConfig.class,
+	MailConfig.class
+})
 @EnableAsync(proxyTargetClass = true)
 @EnableScheduling
 public class ContextConfigImpl extends ContextConfig implements AsyncConfigurer, SchedulingConfigurer {
