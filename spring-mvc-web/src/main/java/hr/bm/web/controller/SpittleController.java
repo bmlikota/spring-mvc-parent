@@ -88,13 +88,13 @@ public class SpittleController {
     return "spittle/add-spittle";
   }
 
-  // Ovo ne kuzim jos.
-  @RequestMapping(method = RequestMethod.GET)
-  public List<Spittle> spittles(
-      @RequestParam(value = "min", defaultValue = "0") int min,
-      @RequestParam(value = "max", defaultValue = "20") int max) {
-    return findSpittlesForTest(min, max);
-  }
+  // TODO Ovo smeta websocket-u!!!!!!!!!!!!!!!!!! Ovo ne kuzim jos.
+//  @RequestMapping(method = RequestMethod.GET)
+//  public List<Spittle> spittles(
+//      @RequestParam(value = "min", defaultValue = "0") int min,
+//      @RequestParam(value = "max", defaultValue = "20") int max) {
+//    return findSpittlesForTest(min, max);
+//  }
 
   public List<Spittle> findSpittlesForTest(int min, int max) {
     ArrayList<Spittle> spittles = new ArrayList<Spittle>();

@@ -12,6 +12,11 @@ public abstract class HomeController {
 		return "home/home";
 	}
 
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request) {
 		request.getSession().invalidate();
