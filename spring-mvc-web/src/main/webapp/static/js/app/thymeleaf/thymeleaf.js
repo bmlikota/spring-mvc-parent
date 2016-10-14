@@ -1,12 +1,12 @@
-$(function() {
+define(function (require) {
 
-	var contextRoot = $('meta').data('context-url');
-	loadScripts();
-	initialize();
+	var $ = require('jquery');
+	var bmAjax = require('../utils/bmAjax');
 
+	init();
 
-	// ******************************** function definitions ********************************************************
-	function initialize() {
+	function init () {
+		var contextRoot = $('meta').data('context-url');
 
 		$('body').on('click', '.counter', function() {
 			var count = parseInt($('p.counter').html(), 10);
@@ -23,14 +23,9 @@ $(function() {
 			var url = 'http://localhost:8080/rest-ws-example/bm-service/get2/';
 			var params = {max : 12, count : 12};
 			var data = {};
-			bmAjax.getJson(url, callback);
+//			bmAjax.getJson(url, callback);
 
 		});
-	};
-
-	function loadScripts() {
-		$.getScript(contextRoot + '/static/js/utils/bmAjax.js', function() {
-		});
-	};
+	}
 
 });

@@ -1,5 +1,7 @@
-var bmAjax = {
-		getString : function(urlPath, callback, params) {
+define(function () {
+
+    return {
+    	getString : function(urlPath, callback, params) {
 			$.ajax({
 				data: params,
 	            url : urlPath,
@@ -19,4 +21,5 @@ var bmAjax = {
 			  }
 			});
 		}
-}
+    }
+});

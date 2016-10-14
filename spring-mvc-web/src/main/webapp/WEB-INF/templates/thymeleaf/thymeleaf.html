@@ -5,7 +5,8 @@
 		<title>thymeleaf</title>
 
 		<!-- Java script -->
-		<script th:src="@{/static/js/thymeleaf/thymeleaf.js}" type="text/javascript"></script>
+<!-- 		<script th:src="@{/static/js/thymeleaf/thymeleaf.js}" type="text/javascript"></script> -->
+		<script th:attr="data-main=@{/static/js/thymeleafBoot.js}" th:src="@{/static/js/lib/require.js}"></script>
 	</head>
 	<body>
 
