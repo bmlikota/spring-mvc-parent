@@ -6,8 +6,9 @@
 //except for 'app' ones, which are in a sibling
 //directory.
 requirejs.config({
-	baseUrl: 'static/js/lib',
+	baseUrl: 'static/js',
     paths: {
-        app: '../app'
+    	bmAjax: 'app/utils/bmAjax',
+        jquery: 'lib/jquery'
     }
 });

@@ -1,7 +1,8 @@
-define(function (require) {
-
-	var $ = require('jquery');
-	var bmAjax = require('../utils/bmAjax');
+//define(function (require) {
+//
+//	var $ = require('jquery');
+//	var bmAjax = require('bmAjax');
+define(['jquery', 'bmAjax'], function ($, bmAjax) {
 
 	init();
 
