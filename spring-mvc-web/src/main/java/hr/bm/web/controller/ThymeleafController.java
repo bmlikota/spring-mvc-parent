@@ -70,7 +70,7 @@ public class ThymeleafController {
 	@PostConstruct
 	public void start() {
 		DefaultOfficeManagerConfiguration defaultOfficeManagerConfiguration = new DefaultOfficeManagerConfiguration();
-		File file = new File("C:\\Users\\bmlikota\\Install\\OpenOffice\\OpenOfficePortable\\App\\openoffice");
+		File file = new File("C:\\Users\\Korisnik\\Install\\OpenOffice\\OpenOfficePortable\\App\\openoffice");
 		defaultOfficeManagerConfiguration.setOfficeHome(file);
 		officeManager = defaultOfficeManagerConfiguration.buildOfficeManager();
 		officeManager.start();
